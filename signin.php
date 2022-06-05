@@ -1,6 +1,42 @@
 <?php
 
 include "./config/connect.php";
+include './config/methods.php';
+
+$email = "";
+$password = "";
+
+if (isset($_COOKIE['email']) and isset($_COOKIE['password'])) 
+{
+    $email = $_COOKIE['email'];
+    $password = $_COOKIE['password'];
+
+}
+
+$login = new login();
+
+if(isset($_POST['login'])){
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $result = $login->loginUser($email, $password);
+    if($result == 1){
+
+      if(isset($_POST['remember']) and $_POST['remember'] == 'on'){
+        setcookie('email', $email, time() + (86400 * 30), "/", $domain = "", $secure = false, $httponly = false );
+        setcookie('password', $password, time() + (86400 * 30), "/", $domain = "", $secure = false, $httponly = false );
+        // echo "<script>alert('Cookies set!')</script>";
+      }
+      
+      echo "<script>window.open('./index.php','_self')</script>";
+    }
+    if($result == 2){
+      echo "<script>alert('Wrong email or password!')</script>";
+    }
+    if($result == 3){
+      echo "<script>alert('No user found with that email!')</script>";
+      echo "<script>window.open('./signup.php','_self')</script>";
+    }
+}
 
 ?>
 
@@ -34,7 +70,7 @@ include "./config/connect.php";
 <body>
 
     <div class="container">
-        <header>
+        <!-- <header>
 
             <nav class="navbar">
                 <div class="navbar-brand">
@@ -68,7 +104,7 @@ include "./config/connect.php";
 
             </nav>
 
-        </header>
+        </header> -->
         <br>
         <br>
         <br>
@@ -83,15 +119,15 @@ include "./config/connect.php";
             <form action="signin.php" method="POST">
                 <div class="form-group">
                     <label for="email">Email :</label>
-                    <input type="email" name="email" id="email" class="form-control" placeholder="Enter your email">
+                    <input type="email" name="email" value="<?php echo $email; ?>" id="email" class="form-control" placeholder="Enter your email">
                 </div>
                 <div class="form-group">
                     <label for="password">Password :</label>
-                    <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password">
+                    <input type="password" name="password" value="<?php echo $password; ?>"  id="password" class="form-control" placeholder="Enter your password">
                 </div>
                 <div class="form-group">
-                    <label for="confirm_password">remember me? </label>
-                    <input type="checkbox" name="remember" placeholder="Confirm your password">
+                    <label for="remember">remember me? </label>
+                    <input type="checkbox" name="remember" value="on" placeholder="Confirm your password">
                 </div>
                 <br>
         <br>

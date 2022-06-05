@@ -1,6 +1,7 @@
 <?php 
 
 include './config/connect.php';
+include './config/methods.php';
 
 $register = new register();
 

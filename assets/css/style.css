@@ -1322,3 +1322,10 @@ footer { background: var(--oxford-blue); }
 }
 
 .copyright a:hover { color: var(--ultramarine-blue); }
+
+/* Login form starts here */
+
+.login-form{
+  margin: auto;
+  text-align: center;
+}

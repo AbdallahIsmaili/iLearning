@@ -23,7 +23,7 @@ class connection{
 
 class register extends connection{
 
-    public function registerUser($name, $email, $password, $confirm_password){
+    public function registerUser($name, $email, $sex, $password, $confirm_password, $idimage){
 
         try{
             
@@ -40,7 +40,7 @@ class register extends connection{
 
             }else {
                 if($password == $confirm_password){
-                    $sql = "INSERT INTO users (email, password, name, type) VALUES ('$email', '$password', '$name', 'user')";
+                    $sql = "INSERT INTO users (email, password, name, sex, type, idimage) VALUES ('$email', '$password', '$name', '$sex', 'user', '$idimage')";
                     $statment = $this->conn->prepare($sql);
                     $statment->execute();
                     $result = $statment->fetchAll(PDO::FETCH_OBJ);
@@ -93,4 +93,50 @@ class login extends connection{
     }
 
 }
+
+// class profile extends connection{
+
+//     public $username;
+//     public $userImage ;
+//     public $userEmail;
+//     public $userSex;
+
+//     public function getUserProfile($email){
+
+//         try{
+//             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//             $sql = "SELECT * FROM users WHERE email = '$email'";
+//             $statment = $this->conn->prepare($sql);
+//             $statment->execute();
+//             $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+//             if(count($result) > 0){
+                
+
+//                 // $username = $result[0]->name;
+//                 $this->username = $result[0]->name;
+
+//                 // $userEmail = $result[0]->email;
+//                 $this->userEmail = $result[0]->email;
+
+//                 // $userSex = $result[0]->sex;
+//                 $this->userSex = $result[0]->sex;
+
+//                 // $userImage = $result[0]->idimage;
+//                 $this->userImage = $result[0]->idimage;
+//                 $_POST[$this->userImage];
+
+//                 // header("Location: ./profile.php");
+
+//                 return 1;
+//             }else{
+//                 return 2;
+//             }
+
+//         }catch(PDOException $e){
+//             echo $e->getMessage();
+//         }
+//     }
+
+// }
 

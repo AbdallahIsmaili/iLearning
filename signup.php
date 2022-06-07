@@ -11,7 +11,16 @@ if(isset($_POST['register'])){
     $email = $_POST['email'];
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
-    $result = $register->registerUser($name, $email, $password, $confirm_password);
+    $sex = $_POST['sex'];
+
+    if($sex == 'male'){
+        $idimage = rand(1,6);
+    }
+    if($sex == 'female'){
+        $idimage = rand(7, 12);
+    }
+
+    $result = $register->registerUser($name, $email, $sex, $password, $confirm_password, $idimage);
 
     echo $result;
 
@@ -112,19 +121,26 @@ if(isset($_POST['register'])){
         <br>
             <form action="signup.php" method="POST">
                 <div class="form-group">
-                    <label for="name">Name</label>
+                    <label for="name">Name :</label>
                     <input type="text" name="name" id="name" class="form-control" placeholder="Enter your name">
                 </div>
                 <div class="form-group">
-                    <label for="email">Email</label>
+                    <label for="email">Email :</label>
                     <input type="email" name="email" id="email" class="form-control" placeholder="Enter your email">
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="email">Sex :</label>
+                    <select name="sex" id="">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password :</label>
                     <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password">
                 </div>
                 <div class="form-group">
-                    <label for="confirm_password">Confirm Password</label>
+                    <label for="confirm_password">Confirm Password :</label>
                     <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="Confirm your password">
                 </div>
                 <br>

@@ -75,7 +75,7 @@ session_start();
         <?php
           if(isset($_SESSION['user_email'])){
               // if user active we will show his name in the active button, if not we will show login button
-              echo '<a class="btn btn-primary" href="user/profile.php">
+              echo '<a class="btn btn-primary" name="myProfile" href="user/profile.php">
                         <p class="btn-text">My account!</p>
                         <span class="square"></span>
                     </a>';

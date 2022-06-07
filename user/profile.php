@@ -17,7 +17,7 @@ if(isset($_SESSION['user_email'])){
   <!--
     - custom css link
   -->
-  <link rel="stylesheet" href="../assets/css/style.css?v1.1">
+  <link rel="stylesheet" href="../assets/css/style.css?v1.3">
   <link rel="stylesheet" href="../assets/css/media_queries.css">
   <link rel="stylesheet" href="../assets/css/animation.css">
 
@@ -70,6 +70,8 @@ if(isset($_SESSION['user_email'])){
 
 </header>
 
+<div class="container">
+
 <br>
 <br>
 <br>
@@ -119,10 +121,7 @@ if(isset($_SESSION['user_email'])){
 
     ?>
     
-    <h1>My Account</h1>
-
-    <a href="../config/methods.php">test</a>
-
+    <h2 class="section-title">My account</h2>
     <br>
 
     <!-- get user image -->
@@ -153,21 +152,22 @@ if(isset($_SESSION['user_email'])){
     }catch(PDOException $e){
         echo $e->getMessage();
     }
-
     ?>
 
-    <img src="<?php echo $userImagePath; ?>" alt="">
+      <div class="profile">
+        <img class="profile-img" src="<?php echo $userImagePath; ?>" alt="">
 
-    <p><?php echo $userImagePath; ?></p>
+        <br>
+        <br>
 
-    <br>
-    <br>
+        <h2 class="section-title"><?php echo $username; ?></h2>
+        <p class="section-subtitle"><?php echo $userEmail; ?></p>
+        <p> <?php echo $userSex; ?></p>
+        <p> <?php echo $userImage; ?></p>
+      </div>
     
-    <p> <?php echo $userEmail; ?></p>
-    <p> <?php echo $username; ?></p>
-    <p> <?php echo $userImage; ?></p>
-    <p> <?php echo $userSex; ?></p>
 
+    </div>
 
 </body>
 </html>

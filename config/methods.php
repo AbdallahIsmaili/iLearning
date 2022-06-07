@@ -1,7 +1,5 @@
 <?php
 
-include "./config/connect.php";
-
 class connection{
 
     public $host = "localhost";
@@ -35,7 +33,6 @@ class register extends connection{
             $statment = $this->conn->prepare($sql);
             $statment->execute();
             $result = $statment->fetchAll(PDO::FETCH_OBJ);
-            echo count($result);
 
             // username or email has already been taken
             if(count($result) > 0){
@@ -74,6 +71,7 @@ class login extends connection{
 
             if(count($result) > 0){
                 if($result[0]->password == $password){
+                    session_start();
                     $_SESSION['user_email'] = $result[0]->email;
                     $_SESSION['user_type'] = $result[0]->type;
 

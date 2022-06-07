@@ -1,4 +1,10 @@
+<?php
 
+include './config/methods.php';
+session_start();
+
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -64,13 +70,24 @@
           <li class="nav-item">
             <a href="#contact">Contact Us</a>
           </li>
-
         </ul>
 
-        <button class="btn btn-primary">
-          <p class="btn-text">Try for free</p>
-          <span class="square"></span>
-        </button>
+        <?php
+          if(isset($_SESSION['user_email'])){
+              // if user active we will show his name in the active button, if not we will show login button
+              echo '<a class="btn btn-primary" href="user/profile.php">
+                        <p class="btn-text">My account!</p>
+                        <span class="square"></span>
+                    </a>';
+          }
+          else{
+            echo '<a class="btn btn-primary" href="signin.php">
+                      <p class="btn-text">Log in!</p>
+                      <span class="square"></span>
+                  </a>';
+          }
+
+        ?>
 
         <button class="nav-toggle-btn">
           <span class="one"></span>

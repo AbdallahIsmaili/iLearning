@@ -70,7 +70,7 @@ if(isset($_POST['login'])){
 <body>
 
     <div class="container">
-        <!-- <header>
+        <header>
 
             <nav class="navbar">
                 <div class="navbar-brand">
@@ -104,7 +104,7 @@ if(isset($_POST['login'])){
 
             </nav>
 
-        </header> -->
+        </header>
         <br>
         <br>
         <br>

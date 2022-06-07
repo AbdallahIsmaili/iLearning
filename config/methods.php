@@ -94,6 +94,52 @@ class login extends connection{
 
 }
 
+if(isset($_GET['action']) && $_GET['action'] == 'delete'){
+
+$useremail = $_GET['useremail'];
+
+$host = "localhost";
+$user = "root";
+$pass = "";
+$db = "elearning";
+$conn;
+
+try{
+    $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $sql = "DELETE FROM users WHERE email = :useremail";
+    $statement = $conn->prepare($sql);
+    $result = $statement->fetchAll(PDO::FETCH_OBJ);
+
+    $data = [
+        ':useremail' => $useremail
+    ];
+    $result = $statement->execute($data);
+
+    if($result)
+    {
+        session_start();
+
+        session_unset(); 
+
+        session_destroy(); 
+        echo "<script>alert('Account Deleted Successfully!');</script>";
+        echo "<script>window.location.href='./index.php';</script>";
+        // exit(0);
+    }
+    else
+    {
+        echo "<script>alert('Account did not Deleted!');</script>";
+        // exit(0);
+    }
+
+}catch(PDOException $e){
+    echo $e->getMessage();
+}
+
+}
+
 // class profile extends connection{
 
 //     public $username;

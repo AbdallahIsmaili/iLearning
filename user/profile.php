@@ -112,6 +112,7 @@ if(isset($_SESSION['user_email'])){
             // header("Location: ./profile.php");
         }else{
             echo "<script>alert('We run into a Problem!!');</script>";
+            echo "<script>window.location.href='../signin.php';</script>";
         }
 
 
@@ -146,6 +147,7 @@ if(isset($_SESSION['user_email'])){
             $userImagePath = $result[0]->path;
         }else{
             echo "<script>alert('We run into a Problem!!');</script>";
+            echo "<script>window.location.href='../signin.php';</script>";
         }
 
 
@@ -157,13 +159,35 @@ if(isset($_SESSION['user_email'])){
       <div class="profile">
         <img class="profile-img" src="<?php echo $userImagePath; ?>" alt="">
 
-        <br>
-        <br>
+        <div class="profile-info">
+          <h2 class="section-title"><?php echo $username; ?></h2>
+          <br>
+          <label for="">My email:</label>
+          <p class="section-subtitle"><?php echo $userEmail; ?></p>
+          <br>
+          <label for="">Gender:</label>
+          <p class="section-subtitle"> <?php echo $userSex; ?></p>
+          <br>
+          <label for="">Image Id:</label>
+          <p class="section-subtitle"> <?php echo $userImage; ?></p>
+          <br>
 
-        <h2 class="section-title"><?php echo $username; ?></h2>
-        <p class="section-subtitle"><?php echo $userEmail; ?></p>
-        <p> <?php echo $userSex; ?></p>
-        <p> <?php echo $userImage; ?></p>
+          <div class="profile-buttons">
+
+            <a class="edit-btn btn btn-primary" name="editMyProfile" href="user/edit-profile.php">
+                <p class="btn-text">Edit my account!</p>
+                <span class="square"></span>
+            </a>
+
+
+            <a class="delete-btn btn btn-primary" name="deleteMyProfile" href='../index.php?useremail=<?php echo $userEmail; ?>&action=delete'>
+                <p class="btn-text">delete my account!</p>
+                <span class="square"></span>
+            </a>
+
+          </div>  
+        </div>
+        
       </div>
     
 

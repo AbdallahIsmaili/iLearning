@@ -177,124 +177,52 @@ session_start();
 
         <ul class="course-item-group">
 
-          <li class="course-category-item">
+          <!-- Get categories from database -->
 
-            <div class="wrapper">
-              <img src="./assets/images/course-category-icon-1.png" alt="category icon" class="category-icon default">
+          <?php
 
-              <img src="./assets/images/course-category-icon-1-w.png" alt="category icon white"
-                class="category-icon hover">
-            </div>
+            $host = "localhost";
+            $user = "root";
+            $pass = "";
+            $db = "elearning";
 
-            <div class="course-category-content">
-              <h3 class="category-title">
-                <a href="#">Learn Data Science</a>
-              </h3>
+            try{
+                $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-              <p class="category-subtitle">Data is Everything</p>
-            </div>
+                $sql = "SELECT * FROM category  ORDER BY idcategory";
+                $statement = $conn->prepare($sql);
+                $statement->execute();
+                $result = $statement->fetchAll(PDO::FETCH_OBJ);
 
-          </li>
+                foreach($result as $row){
+                    echo '<li class="course-category-item">
+                            <div class="wrapper">
+                            <img src="./assets/images/course-category-icon-1.png" alt="category icon" class="category-icon default">
+                
+                            <img src="./assets/images/course-category-icon-1-w.png" alt="category icon white"
+                                class="category-icon hover">
+                            </div>
+                
+                            <div class="course-category-content">
+                            <h3 class="category-title">
+                            <a href="category.php?idcategory='.$row->idcategory.'">'.$row->namecategory.'</a>
+                            </h3>
+                
+                            <p class="category-subtitle">'.$row->categorydesc.'</p>
+                            </div>
+                
+                        </li>';
+                }
 
-
-          <li class="course-category-item">
-
-            <div class="wrapper">
-              <img src="./assets/images/course-category-icon-2.png" alt="category icon" class="category-icon default">
-
-              <img src="./assets/images/course-category-icon-2-w.png" alt="category icon white"
-                class="category-icon hover">
-            </div>
-
-            <div class="course-category-content">
-              <h3 class="category-title">
-                <a href="#">Business Strategy</a>
-              </h3>
-
-              <p class="category-subtitle">Improve your business</p>
-            </div>
-
-          </li>
-
-
-          <li class="course-category-item">
-
-            <div class="wrapper">
-              <img src="./assets/images/course-category-icon-3.png" alt="category icon" class="category-icon default">
-
-              <img src="./assets/images/course-category-icon-3-w.png" alt="category icon white"
-                class="category-icon hover">
-            </div>
-
-            <div class="course-category-content">
-              <h3 class="category-title">
-                <a href="#">Learn Art & Design</a>
-              </h3>
-
-              <p class="category-subtitle">Fun & Challenging</p>
-            </div>
-
-          </li>
+            }catch(PDOException $e){
+                echo $e->getMessage();
+            }
 
 
-          <li class="course-category-item">
-
-            <div class="wrapper">
-              <img src="./assets/images/course-category-icon-4.png" alt="category icon" class="category-icon default">
-
-              <img src="./assets/images/course-category-icon-4-w.png" alt="category icon white"
-                class="category-icon hover">
-            </div>
-
-            <div class="course-category-content">
-              <h3 class="category-title">
-                <a href="#">Learn Lifestyle</a>
-              </h3>
-
-              <p class="category-subtitle">New Skills, New You</p>
-            </div>
-
-          </li>
+          ?>
 
 
-          <li class="course-category-item">
-
-            <div class="wrapper">
-              <img src="./assets/images/course-category-icon-5.png" alt="category icon" class="category-icon default">
-
-              <img src="./assets/images/course-category-icon-5-w.png" alt="category icon white"
-                class="category-icon hover">
-            </div>
-
-            <div class="course-category-content">
-              <h3 class="category-title">
-                <a href="#">Learn Marketing</a>
-              </h3>
-
-              <p class="category-subtitle">Improve your business</p>
-            </div>
-
-          </li>
-
-
-          <li class="course-category-item">
-
-            <div class="wrapper">
-              <img src="./assets/images/course-category-icon-6.png" alt="category icon" class="category-icon default">
-
-              <img src="./assets/images/course-category-icon-6-w.png" alt="category icon white"
-                class="category-icon hover">
-            </div>
-
-            <div class="course-category-content">
-              <h3 class="category-title">
-                <a href="#">Learn Finance</a>
-              </h3>
-
-              <p class="category-subtitle">Fun & Challenging</p>
-            </div>
-
-          </li>
 
         </ul>
 

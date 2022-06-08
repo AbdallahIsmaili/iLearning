@@ -94,6 +94,7 @@ class login extends connection{
 
 }
 
+
 if(isset($_GET['action']) && $_GET['action'] == 'delete'){
 
 $useremail = $_GET['useremail'];
@@ -110,10 +111,9 @@ try{
 
     $sql = "DELETE FROM users WHERE email = :useremail";
     $statement = $conn->prepare($sql);
-    $result = $statement->fetchAll(PDO::FETCH_OBJ);
 
     $data = [
-        ':useremail' => $useremail
+        'useremail' => $useremail
     ];
     $result = $statement->execute($data);
 
@@ -139,6 +139,95 @@ try{
 }
 
 }
+
+
+// EDIT PROFILE FUNCTION
+
+
+if(isset($_GET['action']) && $_GET['action'] == 'edit'){
+
+$useremail = $_GET['useremail'];
+
+$host = "localhost";
+$user = "root";
+$pass = "";
+$db = "elearning";
+$conn;
+
+try{
+    $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $sql = "SELECT * FROM users WHERE email = :useremail";
+    $statement = $conn->prepare($sql);
+
+    $data = [
+        'useremail' => $useremail
+    ];
+    $result = $statement->execute($data);
+    $result = $statement->fetchAll(PDO::FETCH_OBJ);
+
+    if(count($result) > 0)
+    {
+        $username = $result[0]->name;
+        $userEmail = $result[0]->email;
+        $userPassword = $result[0]->password;
+        $userGender = $result[0]->sex;
+        $userIdImage = $result[0]->idimage;
+    }
+    else
+    {
+        echo "<script>alert('Problem!');</sc$result>";
+    }
+
+}catch(PDOException $e){
+    echo $e->getMessage();
+}
+
+}
+
+// UPDATE INFORMATION CLASS
+
+class update extends connection{
+
+    public function updateUser($newName, $oldEmail, $newEmail, $newPassword, $confirm_password, $newIdImage){
+
+        try{
+            
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $sql = "SELECT * FROM users WHERE email = '$oldEmail'";
+
+            $statment = $this->conn->prepare($sql);
+            $statment->execute();
+            $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+            // username or email has already been taken
+            if(count($result) > 0){
+                if($newPassword == $confirm_password){
+                    $sql = "UPDATE users SET email = '$newEmail', name = '$newName', password = '$newPassword', idimage = '$newIdImage' WHERE email = '$oldEmail'";
+                    $statment = $this->conn->prepare($sql);
+                    $statment->execute();
+                    $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+                    return 1;
+
+                }else{
+                    return 2;
+                }
+
+            }else {
+                
+                return 3;
+            }
+
+        }catch(PDOException $e){
+            echo $e->getMessage();
+        }
+    }
+}
+
+
 
 // class profile extends connection{
 

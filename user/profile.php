@@ -174,7 +174,7 @@ if(isset($_SESSION['user_email'])){
 
           <div class="profile-buttons">
 
-            <a class="edit-btn btn btn-primary" name="editMyProfile" href="user/edit-profile.php">
+            <a class="edit-btn btn btn-primary" name="editMyProfile" href="edit-profile.php?useremail=<?php echo $userEmail; ?>&action=edit">
                 <p class="btn-text">Edit my account!</p>
                 <span class="square"></span>
             </a>

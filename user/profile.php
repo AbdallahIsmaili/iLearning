@@ -17,7 +17,7 @@ if(isset($_SESSION['user_email'])){
   <!--
     - custom css link
   -->
-  <link rel="stylesheet" href="../assets/css/style.css?v1.1">
+  <link rel="stylesheet" href="../assets/css/style.css?v1.3">
   <link rel="stylesheet" href="../assets/css/media_queries.css">
   <link rel="stylesheet" href="../assets/css/animation.css">
 
@@ -50,7 +50,7 @@ if(isset($_SESSION['user_email'])){
       <a href="#about">About Us</a>
     </li>
     <li class="nav-item">
-      <a href="#course">Courses</a>
+      <a href="../categories.php">Courses</a>
     </li>
     <li class="nav-item">
       <a href="#blog">Blog</a>
@@ -189,6 +189,18 @@ if(isset($_SESSION['user_email'])){
                 <p class="btn-text">Log out!</p>
                 <span class="square"></span>
             </a>
+
+            <?php
+
+              if(isset($_SESSION['user_type'])){
+                if($_SESSION['user_type'] == 'admin'){
+                  echo "<a class='admin-btn btn btn-primary' name='adminPanel' href='../admin/dashboard.php'>
+                      <p class='btn-text'>Admin Panel</p>
+                      <span class='square'></span>
+                  </a>";
+                }
+              }
+            ?>
 
             
 

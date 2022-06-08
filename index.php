@@ -56,13 +56,13 @@ session_start();
         <ul class="navbar-nav">
 
           <li class="nav-item">
-            <a href="#home">Home</a>
+            <a href="#">Home</a>
           </li>
           <li class="nav-item">
             <a href="#about">About Us</a>
           </li>
           <li class="nav-item">
-            <a href="#course">Courses</a>
+            <a href="categories.php">Courses</a>
           </li>
           <li class="nav-item">
             <a href="#blog">Blog</a>

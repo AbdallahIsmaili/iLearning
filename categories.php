@@ -173,7 +173,7 @@ session_start();
 
         <p class="section-subtitle">Course Category</p>
 
-        <h2 class="section-title">Explore Popular Courses</h2>
+        <h2 class="section-title">Explore Out Categories</h2>
 
         <ul class="course-item-group">
 
@@ -198,9 +198,9 @@ session_start();
                 foreach($result as $row){
                     echo '<li class="course-category-item">
                             <div class="wrapper">
-                            <img src="./assets/images/course-category-icon-1.png" alt="category icon" class="category-icon default">
+                            <img src="'.$row->image.'" alt="category icon" class="category-icon default">
                 
-                            <img src="./assets/images/course-category-icon-1-w.png" alt="category icon white"
+                            <img src="'.$row->image.'" alt="category icon white"
                                 class="category-icon hover">
                             </div>
                 
@@ -221,8 +221,6 @@ session_start();
 
 
           ?>
-
-
 
         </ul>
 

@@ -1351,6 +1351,7 @@ footer { background: var(--oxford-blue); }
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
 .edit-btn{
@@ -1363,4 +1364,9 @@ footer { background: var(--oxford-blue); }
 
 .logout-btn{
   background-color: cyan;
+}
+
+.admin-btn{
+  background-color: violet;
+  margin-top: 10px;
 }

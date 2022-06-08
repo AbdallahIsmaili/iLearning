@@ -74,6 +74,8 @@ class login extends connection{
                     session_start();
                     $_SESSION['user_email'] = $result[0]->email;
                     $_SESSION['user_type'] = $result[0]->type;
+                    $_SESSION['user_name'] = $result[0]->name;
+                    $_SESSION['user_image'] = $result[0]->idimage;
 
                     return 1;
                 }else{
@@ -240,7 +242,149 @@ if(isset($_GET['action']) && $_GET['action'] == 'logout'){
 
 }
 
+// GET TOTAL USERS
 
+function getTotalUsers(){
+    $host = "localhost";
+    $user = "root";
+    $pass = "";
+    $db = "elearning";
+
+    try{
+        $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $sql = "SELECT * FROM users";
+        $statement = $conn->prepare($sql);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_OBJ);
+
+        return count($result);
+
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }
+}
+
+// GET TOTAL COMMENTS FUNCTION 
+
+function  getTotalComments(){
+    $host = "localhost";
+    $user = "root";
+    $pass = "";
+    $db = "elearning";
+
+    try{
+        $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $sql = "SELECT * FROM comments";
+        $statement = $conn->prepare($sql);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_OBJ);
+
+        return count($result);
+
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }
+}
+
+// GET TOTAL COURSES FUNCTION
+
+function getTotalCourses(){
+    $host = "localhost";
+    $user = "root";
+    $pass = "";
+    $db = "elearning";
+
+    try{
+        $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $sql = "SELECT * FROM course";
+        $statement = $conn->prepare($sql);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_OBJ);
+
+        return count($result);
+
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }
+}
+
+// GET TOTAL CATEGORIES FUNCTION 
+
+function getTotalCategories(){
+    $host = "localhost";
+    $user = "root";
+    $pass = "";
+    $db = "elearning";
+
+    try{
+        $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $sql = "SELECT * FROM category";
+        $statement = $conn->prepare($sql);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_OBJ);
+
+        return count($result);
+
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }
+}
+
+// GET TOTAL POSTS FUNCTION 
+
+function getTotalPosts(){
+    $host = "localhost";
+    $user = "root";
+    $pass = "";
+    $db = "elearning";
+
+    try{
+        $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $sql = "SELECT * FROM posts";
+        $statement = $conn->prepare($sql);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_OBJ);
+
+        return count($result);
+
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }
+}
+
+// GET TOTAL ADMIN FUNCTION 
+
+function getTotalAdmin(){
+    $host = "localhost";
+    $user = "root";
+    $pass = "";
+    $db = "elearning";
+
+    try{
+        $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $sql = "SELECT * FROM users where type = 'admin'";
+        $statement = $conn->prepare($sql);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_OBJ);
+
+        return count($result);
+
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }
+}
 
 // class profile extends connection{
 

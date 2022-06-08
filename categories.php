@@ -56,7 +56,7 @@ session_start();
         <ul class="navbar-nav">
 
           <li class="nav-item">
-            <a href="#home">Home</a>
+            <a href="index.php">Home</a>
           </li>
           <li class="nav-item">
             <a href="#about">About Us</a>
@@ -148,7 +148,7 @@ session_start();
           <div class="img-box">
 
             <img src="./assets/images/banner-img-bg.png" alt="colorful background shape" class="background-shape">
-            <img src="./assets/images/banner-img.png" alt="banner image" class="banner-img">
+            <img src="./assets/images/categories-bunner-img.png" alt="banner image" class="banner-img">
 
             <img src="./assets/images/banner-aliment-icon-1.png" alt="" class="icon-1 smooth-zigzag-anim-1" width="250">
             <img src="./assets/images/banner-aliment-icon-2.png" alt="" class="icon-2 smooth-zigzag-anim-2" width="240">

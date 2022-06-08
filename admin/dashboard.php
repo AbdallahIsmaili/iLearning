@@ -39,11 +39,11 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
 
         <div class="menu-items">
             <ul class="nav-links">
-                <li><a href="#">
+                <li><a href="#dashboard">
                     <i class="uil uil-estate"></i>
                     <span class="link-name">Dashboard</span>
                 </a></li>
-                <li><a href="#">
+                <li><a href="#content">
                     <i class="uil uil-files-landscapes"></i>
                     <span class="link-name">Content</span>
                 </a></li>
@@ -89,7 +89,7 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
         </div>
     </nav>
 
-    <section class="dashboard">
+    <section class="dashboard" id="dashboard">
         <div class="top">
             <i class="uil uil-bars sidebar-toggle"></i>
 
@@ -342,19 +342,15 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
 
                         ?>
                     </div>
-                    <!-- <div class="data status">
-                        <span class="data-title">Status</span>
-                        <span class="data-list">Liked</span>
-                        <span class="data-list">Liked</span>
-                        <span class="data-list">Liked</span>
-                        <span class="data-list">Liked</span>
-                        <span class="data-list">Liked</span>
-                        <span class="data-list">Liked</span>
-                        <span class="data-list">Liked</span>
-                    </div> -->
                 </div>
             </div>
         </div>
+    </section>
+
+    <section class="dashboard content" id="content">
+
+    <h1>content here!</h1>
+
     </section>
 
     <script src="../assets/js/main.js"></script>

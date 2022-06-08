@@ -17,7 +17,7 @@ if(isset($_SESSION['user_email'])){
   <!--
     - custom css link
   -->
-  <link rel="stylesheet" href="../assets/css/style.css?v1.3">
+  <link rel="stylesheet" href="../assets/css/style.css?v1.1">
   <link rel="stylesheet" href="../assets/css/media_queries.css">
   <link rel="stylesheet" href="../assets/css/animation.css">
 
@@ -44,7 +44,7 @@ if(isset($_SESSION['user_email'])){
   <ul class="navbar-nav">
 
     <li class="nav-item">
-      <a href="#home">Home</a>
+      <a href="../index.php">Home</a>
     </li>
     <li class="nav-item">
       <a href="#about">About Us</a>
@@ -184,6 +184,13 @@ if(isset($_SESSION['user_email'])){
                 <p class="btn-text">delete my account!</p>
                 <span class="square"></span>
             </a>
+
+            <a class="logout-btn btn btn-primary" name="logoutFromMyProfile" href='../index.php?useremail=<?php echo $userEmail; ?>&action=logout'>
+                <p class="btn-text">Log out!</p>
+                <span class="square"></span>
+            </a>
+
+            
 
           </div>  
         </div>

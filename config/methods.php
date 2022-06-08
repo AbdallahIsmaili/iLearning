@@ -227,6 +227,19 @@ class update extends connection{
     }
 }
 
+// LOG OUT FROM MY ACCOUNT
+
+if(isset($_GET['action']) && $_GET['action'] == 'logout'){
+
+    session_start();
+
+    session_unset(); 
+
+    session_destroy();
+    echo "<script>window.location.href='./index.php';</script>";
+
+}
+
 
 
 // class profile extends connection{

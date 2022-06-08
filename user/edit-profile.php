@@ -11,7 +11,6 @@ include '../config/methods.php';
 
 $update = new update();
 $oldEmail = $_GET['useremail'];
-echo $oldEmail;
 
 if(isset($_POST['update-profile']) && isset($_GET['useremail'])){
 
@@ -56,9 +55,9 @@ if(isset($_POST['update-profile']) && isset($_GET['useremail'])){
   <!--
     - custom css link
   -->
-  <link rel="stylesheet" href="./assets/css/style.css?v1.1">
-  <link rel="stylesheet" href="./assets/css/media_queries.css">
-  <link rel="stylesheet" href="./assets/css/animation.css">
+  <link rel="stylesheet" href="../assets/css/style.css?v1.3">
+  <link rel="stylesheet" href="../assets/css/media_queries.css">
+  <link rel="stylesheet" href="../assets/css/animation.css">
 
   <!--
     - google font link
@@ -78,7 +77,7 @@ if(isset($_POST['update-profile']) && isset($_GET['useremail'])){
 
             <nav class="navbar">
                 <div class="navbar-brand">
-                    <img src="./assets/images/logo.png" alt="Educator Logo">
+                    <img src="../assets/images/logo.png" alt="Educator Logo">
                 </div>
 
                 <ul class="navbar-nav">
@@ -94,11 +93,6 @@ if(isset($_POST['update-profile']) && isset($_GET['useremail'])){
                     </li>
 
                 </ul>
-
-                <a class="btn btn-primary" href="signin.php">
-                    <p class="btn-text">Or Sign in?</p>
-                    <span class="square"></span>
-                </a>
 
                 <button class="nav-toggle-btn">
                     <span class="one"></span>
@@ -177,7 +171,7 @@ if(isset($_POST['update-profile']) && isset($_GET['useremail'])){
   <!--
     - custom js link
   -->
-  <script src="./assets/js/script.js"></script>
+  <script src="../assets/js/script.js"></script>
 
   <!--
     - ionicon link

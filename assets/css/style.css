@@ -1360,3 +1360,7 @@ footer { background: var(--oxford-blue); }
 .delete-btn{
   background-color: darkred;
 }
+
+.logout-btn{
+  background-color: cyan;
+}

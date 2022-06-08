@@ -464,3 +464,11 @@ nav.close ~ .dashboard .top{
         width: 100%;
     }
 }
+
+.categories{
+    margin-top: 3rem;
+}
+
+.categories > h1{
+    margin-top: 5rem;
+}

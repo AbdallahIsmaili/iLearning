@@ -20,7 +20,7 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!----======== CSS ======== -->
-    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css?v1.1">
      
     <!----===== Iconscout CSS ===== -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -43,9 +43,9 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
                     <i class="uil uil-estate"></i>
                     <span class="link-name">Dashboard</span>
                 </a></li>
-                <li><a href="#content">
+                <li><a href="#categories">
                     <i class="uil uil-files-landscapes"></i>
-                    <span class="link-name">Content</span>
+                    <span class="link-name">Categories</span>
                 </a></li>
                 <li><a href="#">
                     <i class="uil uil-files-landscapes"></i>
@@ -347,11 +347,161 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
         </div>
     </section>
 
-    <section class="dashboard content" id="content">
+    <section class="dashboard categories" id="categories">
+    <div class="dash-content">
 
-    <h1>content here!</h1>
+    <h1>All About Categories Here!</h1>
+
+    <div class="activity">
+                <div class="title">
+                    <i class="uil uil-clock-three"></i>
+                    <span class="text">All Categories</span>
+                </div>
+
+                <div class="activity-data">
+                    <div class="data names">
+                        <span class="data-title">Category Id</span>
+
+                        <!-- get usernames from data base -->
+                        <?php
+
+                            $host = "localhost";
+                            $user = "root";
+                            $pass = "";
+                            $db = "elearning";
+                            $conn;
+
+                            try{
+                                $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                $sql = "SELECT * FROM category";
+                                $statment = $conn->prepare($sql);
+                                $statment->execute();
+                                $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+                                if(count($result) > 0){
+                                    foreach($result as $row){
+                                        echo "<span class='data-list'>".$row->idcategory."</span>";
+                                    }
+                                }else{
+                                    echo "<script>alert('We run into a Problem!!');</script>";
+                                }
+                            }catch(PDOException $e){
+                                echo $e->getMessage();
+                            }
+
+                        ?>
+                        
+                    </div>
+                    <div class="data email">
+                        <span class="data-title">Category name</span>
+                        
+                        <!-- get email from data base -->
+                        <?php
+
+                            $host = "localhost";
+                            $user = "root";
+                            $pass = "";
+                            $db = "elearning";
+                            $conn;
+
+                            try{
+                                $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                $sql = "SELECT * FROM category";
+                                $statment = $conn->prepare($sql);
+                                $statment->execute();
+                                $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+                                if(count($result) > 0){
+                                    foreach($result as $row){
+                                        echo "<span class='data-list'>".$row->namecategory."</span>";
+                                    }
+                                }else{
+                                    echo "<script>alert('We run into a Problem!!');</script>";
+                                }
+                            }catch(PDOException $e){
+                                echo $e->getMessage();
+                            }
+
+                        ?>
+                    </div>
+                    <div class="data joined">
+                        <span class="data-title">Category description</span>
+                        <!-- get user sex from data base -->
+                        <?php
+
+                            $host = "localhost";
+                            $user = "root";
+                            $pass = "";
+                            $db = "elearning";
+                            $conn;
+
+                            try{
+                                $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                $sql = "SELECT * FROM category";
+                                $statment = $conn->prepare($sql);
+                                $statment->execute();
+                                $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+                                if(count($result) > 0){
+                                    foreach($result as $row){
+                                        echo "<span class='data-list'>".$row->categorydesc."</span>";
+                                    }
+                                }else{
+                                    echo "<script>alert('We run into a Problem!!');</script>";
+                                }
+                            }catch(PDOException $e){
+                                echo $e->getMessage();
+                            }
+
+                        ?>
+                    </div>
+
+                    <div class="data joined">
+                        <span class="data-title">Actions</span>
+                        <?php
+
+                            $host = "localhost";
+                            $user = "root";
+                            $pass = "";
+                            $db = "elearning";
+                            $conn;
+
+                            try{
+                                $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                $sql = "SELECT * FROM category";
+                                $statment = $conn->prepare($sql);
+                                $statment->execute();
+                                $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+                                if(count($result) > 0){
+                                    foreach($result as $row){
+                                        echo "<div class='data-list'>Delete</div>";
+                                    }
+                                }else{
+                                    echo "<script>alert('We run into a Problem!!');</script>";
+                                }
+                            }catch(PDOException $e){
+                                echo $e->getMessage();
+                            }
+
+                        ?>
+                    </div>
+                    
+                </div>
+                <div class="title">
+                    <i class="uil uil-clock-three"></i>
+                    <span class="text">Edit category</span>
+                </div>
+            </div>
+        </div>
 
     </section>
+
+
 
     <script src="../assets/js/main.js"></script>
 </body>

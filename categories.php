@@ -13,7 +13,7 @@ session_start();
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>iLearning - Online Courses</title>
+  <title>iLearning - Categories</title>
 
   <!--
     - custom css link
@@ -190,7 +190,7 @@ session_start();
                 $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                $sql = "SELECT * FROM category  ORDER BY idcategory";
+                $sql = "SELECT * FROM category ORDER BY idcategory";
                 $statement = $conn->prepare($sql);
                 $statement->execute();
                 $result = $statement->fetchAll(PDO::FETCH_OBJ);

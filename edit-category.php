@@ -29,12 +29,12 @@ if(isset($_POST['update-category']) && isset($_GET['id'])){
     if($result == 1){
         // header("Location: ./signup.php");
         echo "<script>alert('Your category has updated successfully!')</script>";
-        echo "<script>window.open('./admin/dashboard.php','_self')</script>";
+        echo "<script>window.close();</script>";
     }
     if($result == 2){
         // header("Location: ./login.php");
         echo "<script>alert('Problem!')</script>";
-        // echo "<script>window.open('./admin/dashboard.php','_self')</script>";
+        echo "<script>window.open('./admin/dashboard.php','_self')</script>";
     }
 }
 
@@ -97,7 +97,7 @@ if(isset($_POST['update-category']) && isset($_GET['id'])){
 <?php
 }
 else{
-  header("Location: ../signin.php");
+  header("Location: ./signin.php");
 }
 
 ?>

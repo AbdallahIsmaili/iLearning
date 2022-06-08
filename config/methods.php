@@ -96,10 +96,13 @@ class login extends connection{
 
 }
 
+$useremail = '';
 
-if(isset($_GET['action']) && $_GET['action'] == 'delete'){
+if(isset($_GET['action']) && isset($_GET['useremail']) && $_GET['action'] == 'delete'){
 
-$useremail = $_GET['useremail'];
+    if(isset($_GET['useremail'])){
+        $useremail = $_GET['useremail'];
+    }
 
 $host = "localhost";
 $user = "root";
@@ -418,6 +421,84 @@ class updateCategory extends connection{
 
             }else {
                 
+                return 2;
+            }
+
+        }catch(PDOException $e){
+            echo $e->getMessage();
+        }
+    }
+}
+
+// FUNCTION TO DELETE CATEGORY
+
+if(isset($_GET['action']) && isset($_GET['idCategory']) && $_GET['action'] == 'delete'){
+
+    if(isset($_GET['idCategory'])){
+        $idC = $_GET['idCategory'];
+    }
+
+$host = "localhost";
+$user = "root";
+$pass = "";
+$db = "elearning";
+$conn;
+
+try{
+    $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $sql = "DELETE FROM category WHERE idcategory = :idCategory";
+    $statement = $conn->prepare($sql);
+
+    $data = [
+        'idCategory' => $idC
+
+    ];
+    $result = $statement->execute($data);
+
+    if($result)
+    {
+        echo "<script>alert('The Category Deleted Successfully!');</script>";
+        echo "<script>window.location.href='./admin/dashboard.php';</script>";
+        // exit(0);
+    }
+    else
+    {
+        echo "<script>alert('The category did not Deleted!');</script>";
+        // exit(0);
+    }
+
+}catch(PDOException $e){
+    echo $e->getMessage();
+}
+
+}
+
+// ADD NEW CATEGORY FUNCTION
+
+class newCategory extends connection{
+
+    public function newCategory($nameCategory, $categoryDesc, $categoryImage){
+
+        try{
+            
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $sql = "SELECT * FROM category WHERE namecategory = '$nameCategory'";
+
+            $statment = $this->conn->prepare($sql);
+            $statment->execute();
+            $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+            if(count($result) > 0){
+                return 1;
+
+            }else {
+                $sql = "INSERT INTO category (namecategory, categorydesc, image) VALUES ('$nameCategory', '$categoryDesc', '$categoryImage')";
+                $statment = $this->conn->prepare($sql);
+                $statment->execute();
+                $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
                 return 2;
             }
 

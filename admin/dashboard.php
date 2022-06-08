@@ -20,7 +20,7 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!----======== CSS ======== -->
-    <link rel="stylesheet" href="../assets/css/dashboard.css?v1.1">
+    <link rel="stylesheet" href="../assets/css/dashboard.css?v1.5">
      
     <!----===== Iconscout CSS ===== -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -479,7 +479,7 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
 
                                 if(count($result) > 0){
                                     foreach($result as $row){
-                                        echo "<div class='data-list'> <a href='../edit-category.php?id=".$row->idcategory."&title=".$row->namecategory."&desc=".$row->categorydesc."&img=".$row->image."&action=editCategory' target='_blank'>Edit</a> | <a href='../index.php?id=".$row->idcategory."&action=delete'>Delete</a> </div>";
+                                        echo "<div class='data-list'> <a href='../edit-category.php?id=".$row->idcategory."&title=".$row->namecategory."&desc=".$row->categorydesc."&img=".$row->image."&action=editCategory' target='_blank'>Edit</a> | <a href='../index.php?idCategory=".$row->idcategory."&action=delete'>Delete</a> </div>";
                                     }
                                 }else{
                                     echo "<script>alert('We run into a Problem!!');</script>";
@@ -492,12 +492,12 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
                     </div>
                     
                 </div>
-                <div class="title">
-                    <i class="uil uil-clock-three"></i>
-                    <span class="text">Edit category</span>
-                </div>
+
             </div>
+            
         </div>
+        <a class="btn btn-primary" href="../add-category.php" target="_blank">Add Category!
+        </a>
 
     </section>
 

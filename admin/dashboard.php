@@ -479,7 +479,7 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
 
                                 if(count($result) > 0){
                                     foreach($result as $row){
-                                        echo "<div class='data-list'>Delete</div>";
+                                        echo "<div class='data-list'> <a href='../edit-category.php?id=".$row->idcategory."&title=".$row->namecategory."&desc=".$row->categorydesc."&img=".$row->image."&action=editCategory' target='_blank'>Edit</a> | <a href='../index.php?id=".$row->idcategory."&action=delete'>Delete</a> </div>";
                                     }
                                 }else{
                                     echo "<script>alert('We run into a Problem!!');</script>";

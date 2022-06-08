@@ -145,10 +145,13 @@ try{
 
 // EDIT PROFILE FUNCTION
 
+$useremail = '';
 
 if(isset($_GET['action']) && $_GET['action'] == 'edit'){
 
-$useremail = $_GET['useremail'];
+if(isset($_GET['useremail'])){
+    $useremail = $_GET['useremail'];
+}
 
 $host = "localhost";
 $user = "root";
@@ -179,7 +182,7 @@ try{
     }
     else
     {
-        echo "<script>alert('Problem!');</sc$result>";
+        echo "<script>alert('Problem!');</script>";
     }
 
 }catch(PDOException $e){
@@ -383,6 +386,44 @@ function getTotalAdmin(){
 
     }catch(PDOException $e){
         echo $e->getMessage();
+    }
+}
+
+// UPDATE CATEGORY INFORMATION
+
+
+class updateCategory extends connection{
+
+    public function updateCategory($newID, $oldID, $newName, $newDesc, $newImage){
+
+        try{
+            
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $sql = "SELECT * FROM category WHERE idcategory = '$oldID'";
+
+            $statment = $this->conn->prepare($sql);
+            $statment->execute();
+            $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+            // username or email has already been taken
+            if(count($result) > 0){
+
+                $sql = "UPDATE category SET idcategory = '$newID', namecategory = '$newName', categorydesc = '$newDesc', image = '$newImage' WHERE idcategory = '$oldID'";
+                $statment = $this->conn->prepare($sql);
+                $statment->execute();
+                $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+                return 1;
+
+            }else {
+                
+                return 2;
+            }
+
+        }catch(PDOException $e){
+            echo $e->getMessage();
+        }
     }
 }
 

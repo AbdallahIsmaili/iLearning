@@ -616,6 +616,33 @@ class newCourse extends connection{
     }
 }
 
+class comment extends connection{
+
+    public function comment($courseId, $userEmail, $publisher, $commentContent, $publishDate){
+
+        try{
+            
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $sql = "INSERT INTO comments (email, idcourse, publisher, content, date) VALUES ('$userEmail', '$courseId', '$publisher', '$commentContent', '$publishDate')";
+
+            $statment = $this->conn->prepare($sql);
+            $statment->execute();
+            $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+            if(isset($result)){
+                return 1;
+
+            }else {
+
+                return 2;
+            }
+
+        }catch(PDOException $e){
+            echo $e->getMessage();
+        }
+    }
+}
+
 
 // class profile extends connection{
 

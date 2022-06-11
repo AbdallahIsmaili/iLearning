@@ -1390,3 +1390,28 @@ footer { background: var(--oxford-blue); }
   margin: auto;
   text-align: center;
 }
+
+.commentBox{
+  margin-top: -4rem;
+  margin-left: 9rem;
+}
+
+.comment{
+  width: 55%;
+  border-radius: 10px;
+  background : rgba(255, 83, 26, 0.1) ;
+  margin: .3rem;
+  padding: 2.5rem;
+}
+
+.comment-subtitle{
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: underline;
+  color: rgb(5, 14, 56);
+}
+.comment-area{
+  background : rgba(5, 14, 56,0.1) ;
+  border-radius: 10px;
+  border: none;
+}

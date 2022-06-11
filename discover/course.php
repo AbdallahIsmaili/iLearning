@@ -13,6 +13,30 @@ if(isset($_SESSION['user_email'])){
         $courseId = $_GET['id'];
     }
 
+    $comment = new comment();
+    $mes = '';
+
+    if(isset($_POST['add-comment'])){
+        $commentContent = $_POST['comment-content'];
+        $publishDate = date('Y-m-d');
+        // $categoryId = $_POST['category'];
+        $publisher = $userName;
+
+        $result = $comment->comment($courseId, $userEmail, $publisher, $commentContent, $publishDate);
+
+
+        if($result == 1){
+            // header("Location: ./signup.php");
+            $mes = "Your comment posted successfully!";
+        }
+        if($result == 2){
+            // header("Location: ./signup.php");
+            $mes = "There is a problem!";
+        }
+
+
+    }
+
     ?>
 
 <!DOCTYPE html>
@@ -23,9 +47,9 @@ if(isset($_SESSION['user_email'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!----======== CSS ======== -->
-    <link rel="stylesheet" href="../assets/css/style.css?v1.6">
-    <link rel="stylesheet" href="../assets/css/media_queries.css?v1.5">
-    <link rel="stylesheet" href="../assets/css/animation.css?v1.5">
+    <link rel="stylesheet" href="../assets/css/style.css?v1.7">
+    <link rel="stylesheet" href="../assets/css/media_queries.css?v1.7">
+    <link rel="stylesheet" href="../assets/css/animation.css?v1.7">
 
     <!-- Video Player -->
     <link href="https://vjs.zencdn.net/7.19.2/video-js.css" rel="stylesheet" />
@@ -67,7 +91,6 @@ if(isset($_SESSION['user_email'])){
 
                 <?php
                     if(isset($_SESSION['user_email'])){
-                        // if user active we will show his name in the active button, if not we will show login button
                         echo '<a class="btn btn-primary" name="myProfile" href="user/profile.php">
                                 <p class="btn-text">My account!</p>
                                 <span class="square"></span>
@@ -155,18 +178,73 @@ if(isset($_SESSION['user_email'])){
 
             <div class="comments-form">
                 
-                <p><?php echo $_SESSION['user_name'] ?></p>
-                <p class=""><?php echo $_SESSION['user_email'] ?></p>
-                <form action="discover/course.php?id=<?php echo $courseId ?>&title=<?php echo $courseTitle ?>" method="post">
+                <p class="comment-subtitle"><?php echo $_SESSION['user_name'] ?></p>
+                <form action="course.php?id=<?php echo $courseId ?>&title=<?php echo $courseTitle ?>" method="post">
             
                     <div class="form-group">
-                        <label for="email">Comment content :</label>
-                        <textarea name="comment-content" placeholder="Enter your comment" cols="30" rows="5"></textarea>
-                    </div>
-                    <button>add this comment</button>
+                        <textarea class="comment-area" name="comment-content" placeholder="Enter your comment" cols="90" rows="8"></textarea>
 
+                        <input type="hidden" name="category" value="<?php echo $row->idcategory ?>">
+                    </div>
+                    
+                    <br>
+                    
+                    <button name="add-comment" class="back-btn btn btn-secondary">
+                        <p class="btn-text">Comment!</p>
+                        <span class="square"></span>
+                    </button>
+                    
                 </form>
+                <span><?php echo $mes; ?></span>
+
             </div>
+
+        </section>
+
+        <section class="commentBox">
+
+        <h2 class="main-heading">Comments: </h2>
+
+            <?php
+
+                $host = "localhost";
+                $user = "root";
+                $pass = "";
+                $db = "elearning";
+
+                try{
+                    $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                    $sql = "SELECT * FROM comments where idcourse = '$courseId' ORDER BY idcomment DESC LIMIT 5";
+                    $statement = $conn->prepare($sql);
+                    $statement->execute();
+                    $result = $statement->fetchAll(PDO::FETCH_OBJ);
+
+                    foreach($result as $row){
+                        $username = $row->publisher;
+                        $commentContent = $row->content;
+                        $publishDate = $row->date;
+                        echo "<div class='comment'>
+                        <div class='publicher'>
+                        <h2 class='section-subtitle'>".$username."</h2>
+                        </div>
+            
+                        <div class='content'>
+                            <p>".$commentContent."</p>
+                            <br>
+                            <h5>". $publishDate ."</h5>
+            
+                        </div>
+                        </div>";
+
+                    }
+
+                }catch(PDOException $e){
+                    echo $e->getMessage();
+                }
+
+            ?>
 
         </section>
 
@@ -270,7 +348,7 @@ if(isset($_SESSION['user_email'])){
 
       </section>
 
-        <a class="back-btn btn btn-secondary" href="user/profile.php">
+        <a class="back-btn btn btn-secondary" href="../category.php?idcategory=<?php echo $row->idcategory; ?>">
             <p class="btn-text">back to courses!</p>
             <span class="square"></span>
         </a>

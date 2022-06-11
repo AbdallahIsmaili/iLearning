@@ -1,6 +1,5 @@
 <?php
 
-include "./config/connect.php";
 include './config/methods.php';
 
 $email = "";

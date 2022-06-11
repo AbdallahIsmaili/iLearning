@@ -22,11 +22,10 @@ if(isset($_POST['register'])){
 
     $result = $register->registerUser($name, $email, $sex, $password, $confirm_password, $idimage);
 
-    echo $result;
 
     if($result == 1){
         // header("Location: ./signup.php");
-        echo "<script>alert('Username or email has already been taken!')</script>";
+        echo "<script>alert('Used Email has been already taken!')</script>";
         echo "<script>window.open('./signup.php','_self')</script>";
     }
     if($result == 2){

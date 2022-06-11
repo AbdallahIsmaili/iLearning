@@ -55,7 +55,7 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
                     <i class="uil uil-chart"></i>
                     <span class="link-name">Analytics</span>
                 </a></li>
-                <li><a href="#">
+                <li><a href="#courses">
                     <i class="uil uil-thumbs-up"></i>
                     <span class="link-name">Courses</span>
                 </a></li>
@@ -497,6 +497,294 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
             
         </div>
         <a class="btn btn-primary" href="../add-category.php" target="_blank">Add Category!
+        </a>
+
+    </section>
+
+    <!-- COURSES SECTION  -->
+    
+    <section class="dashboard courses" id="courses">
+    <div class="dash-content">
+
+    <h1>All About Courses Here!</h1>
+
+    <div class="activity">
+                <div class="title">
+                    <i class="uil uil-clock-three"></i>
+                    <span class="text">All Courses</span>
+                </div>
+
+                <div class="activity-data">
+                    <div class="data names">
+                        <span class="data-title">Course Id</span>
+
+                        <!-- get usernames from data base -->
+                        <?php
+
+                            $host = "localhost";
+                            $user = "root";
+                            $pass = "";
+                            $db = "elearning";
+                            $conn;
+
+                            try{
+                                $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                $sql = "SELECT * FROM course";
+                                $statment = $conn->prepare($sql);
+                                $statment->execute();
+                                $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+                                if(count($result) > 0){
+                                    foreach($result as $row){
+                                        echo "<span class='data-list'>".$row->idcourse."</span>";
+                                    }
+                                }else{
+                                    echo "<script>alert('We run into a Problem!!');</script>";
+                                }
+                            }catch(PDOException $e){
+                                echo $e->getMessage();
+                            }
+
+                        ?>
+                        
+                    </div>
+                    <div class="data email">
+                        <span class="data-title">Course name</span>
+                        
+                        <!-- get email from data base -->
+                        <?php
+
+                            $host = "localhost";
+                            $user = "root";
+                            $pass = "";
+                            $db = "elearning";
+                            $conn;
+
+                            try{
+                                $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                $sql = "SELECT * FROM course";
+                                $statment = $conn->prepare($sql);
+                                $statment->execute();
+                                $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+                                if(count($result) > 0){
+                                    foreach($result as $row){
+                                        echo "<span class='data-list'>".substr($row->namecourse,0, 20)."</span>";
+                                    }
+                                }else{
+                                    echo "<script>alert('We run into a Problem!!');</script>";
+                                }
+                            }catch(PDOException $e){
+                                echo $e->getMessage();
+                            }
+
+                        ?>
+                    </div>
+                    <div class="data joined">
+                        <span class="data-title">Course for</span>
+                        <!-- get user sex from data base -->
+                        <?php
+
+                            $host = "localhost";
+                            $user = "root";
+                            $pass = "";
+                            $db = "elearning";
+                            $conn;
+
+                            try{
+                                $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                $sql = "SELECT * FROM course";
+                                $statment = $conn->prepare($sql);
+                                $statment->execute();
+                                $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+                                if(count($result) > 0){
+                                    foreach($result as $row){
+                                        echo "<span class='data-list'>".$row->coursefor."</span>";
+                                    }
+                                }else{
+                                    echo "<script>alert('We run into a Problem!!');</script>";
+                                }
+                            }catch(PDOException $e){
+                                echo $e->getMessage();
+                            }
+
+                        ?>
+                    </div>
+
+                    <div class="data joined">
+                        <span class="data-title">Publish date</span>
+                        <!-- get user sex from data base -->
+                        <?php
+
+                            $host = "localhost";
+                            $user = "root";
+                            $pass = "";
+                            $db = "elearning";
+                            $conn;
+
+                            try{
+                                $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                $sql = "SELECT * FROM course";
+                                $statment = $conn->prepare($sql);
+                                $statment->execute();
+                                $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+                                if(count($result) > 0){
+                                    foreach($result as $row){
+                                        echo "<span class='data-list'>".$row->date."</span>";
+                                    }
+                                }else{
+                                    echo "<script>alert('We run into a Problem!!');</script>";
+                                }
+                            }catch(PDOException $e){
+                                echo $e->getMessage();
+                            }
+
+                        ?>
+                    </div>
+
+                    <div class="data joined">
+                        <span class="data-title">The Owner</span>
+                        <!-- get user sex from data base -->
+                        <?php
+
+                            $host = "localhost";
+                            $user = "root";
+                            $pass = "";
+                            $db = "elearning";
+                            $conn;
+
+                            try{
+                                $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                $sql = "SELECT * FROM course";
+                                $statment = $conn->prepare($sql);
+                                $statment->execute();
+                                $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+                                if(count($result) > 0){
+                                    foreach($result as $row){
+                                        echo "<span class='data-list'>".$row->teacher."</span>";
+                                    }
+                                }else{
+                                    echo "<script>alert('We run into a Problem!!');</script>";
+                                }
+                            }catch(PDOException $e){
+                                echo $e->getMessage();
+                            }
+
+                        ?>
+                    </div>
+
+                    <div class="data joined">
+                        <span class="data-title">Course length</span>
+                        <!-- get user sex from data base -->
+                        <?php
+
+                            $host = "localhost";
+                            $user = "root";
+                            $pass = "";
+                            $db = "elearning";
+                            $conn;
+
+                            try{
+                                $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                $sql = "SELECT * FROM course";
+                                $statment = $conn->prepare($sql);
+                                $statment->execute();
+                                $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+                                if(count($result) > 0){
+                                    foreach($result as $row){
+                                        echo "<span class='data-list'>".$row->lenght."</span>";
+                                    }
+                                }else{
+                                    echo "<script>alert('We run into a Problem!!');</script>";
+                                }
+                            }catch(PDOException $e){
+                                echo $e->getMessage();
+                            }
+
+                        ?>
+                    </div>
+
+                    <div class="data joined">
+                        <span class="data-title">Course Path</span>
+                        <!-- get user sex from data base -->
+                        <?php
+
+                            $host = "localhost";
+                            $user = "root";
+                            $pass = "";
+                            $db = "elearning";
+                            $conn;
+
+                            try{
+                                $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                $sql = "SELECT * FROM course";
+                                $statment = $conn->prepare($sql);
+                                $statment->execute();
+                                $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+                                if(count($result) > 0){
+                                    foreach($result as $row){
+                                        echo "<span class='data-list'><a href=".$row->path." target='_blank'>Here!</a></span>";
+                                    }
+                                }else{
+                                    echo "<script>alert('We run into a Problem!!');</script>";
+                                }
+                            }catch(PDOException $e){
+                                echo $e->getMessage();
+                            }
+
+                        ?>
+                    </div>
+
+                    <div class="data joined">
+                        <span class="data-title">Actions</span>
+                        <?php
+
+                            $host = "localhost";
+                            $user = "root";
+                            $pass = "";
+                            $db = "elearning";
+                            $conn;
+
+                            try{
+                                $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                $sql = "SELECT * FROM course";
+                                $statment = $conn->prepare($sql);
+                                $statment->execute();
+                                $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+                                if(count($result) > 0){
+                                    foreach($result as $row){
+                                        echo "<div class='data-list'> <a href='../edit-course.php?id=".$row->idcourse."&title=".$row->namecourse."&desc=".$row->description."&for=".$row->coursefor."&img=".$row->image."&path=".$row->path."&idcat=".$row->idcategory."&date=".$row->date."&teacher=".$row->teacher."&teacherimg=".$row->teacherimage."&language=".$row->langue."&action=editcourse' target='_blank'>Edit</a> | <a href='../index.php?idcourse=".$row->idcourse."&action=delete'>Delete</a> </div>";
+                                    }
+                                }else{
+                                    echo "<script>alert('We run into a Problem!!');</script>";
+                                }
+                            }catch(PDOException $e){
+                                echo $e->getMessage();
+                            }
+
+                        ?>
+                    </div>
+                    
+                </div>
+
+            </div>
+            
+        </div>
+        <a class="btn btn-primary" href="../add-course.php" target="_blank">Add Course!
         </a>
 
     </section>

@@ -24,8 +24,6 @@ if(isset($_POST['update-category']) && isset($_GET['id'])){
 
     $result = $updateCategory->updateCategory($newID, $oldId, $newName, $newDesc, $newImage);
 
-    echo $result;
-
     if($result == 1){
         // header("Location: ./signup.php");
         echo "<script>alert('Your category has updated successfully!')</script>";
@@ -35,6 +33,10 @@ if(isset($_POST['update-category']) && isset($_GET['id'])){
         // header("Location: ./login.php");
         echo "<script>alert('Problem!')</script>";
         echo "<script>window.open('./admin/dashboard.php','_self')</script>";
+    }
+    if($result == 3){
+        // header("Location: ./login.php");
+        echo "<script>alert('Category id is already taken, please choose an other one!')</script>";
     }
 }
 

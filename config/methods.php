@@ -412,12 +412,21 @@ class updateCategory extends connection{
             // username or email has already been taken
             if(count($result) > 0){
 
-                $sql = "UPDATE category SET idcategory = '$newID', namecategory = '$newName', categorydesc = '$newDesc', image = '$newImage' WHERE idcategory = '$oldID'";
+                $sql = "SELECT * FROM category WHERE idcategory = '$newID'";
                 $statment = $this->conn->prepare($sql);
                 $statment->execute();
                 $result = $statment->fetchAll(PDO::FETCH_OBJ);
 
-                return 1;
+                if(count($result) > 0){
+                    return 3;
+                }else{
+                    
+                    $sql = "UPDATE category SET idcategory = '$newID', namecategory = '$newName', categorydesc = '$newDesc', image = '$newImage' WHERE idcategory = '$oldID'";
+                    $statment = $this->conn->prepare($sql);
+                    $statment->execute();
+                    $result = $statment->fetchAll(PDO::FETCH_OBJ);
+                    return 1;
+                }
 
             }else {
                 
@@ -429,6 +438,7 @@ class updateCategory extends connection{
         }
     }
 }
+
 
 // FUNCTION TO DELETE CATEGORY
 
@@ -508,6 +518,52 @@ class newCategory extends connection{
     }
 }
 
+
+// UPDATE COURSE
+
+class updateCourse extends connection{
+
+    public function updateCourse($newID, $oldID, $newName, $newDesc, $newImage){
+
+        try{
+            
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $sql = "SELECT * FROM course WHERE idcourse = '$oldID'";
+
+            $statment = $this->conn->prepare($sql);
+            $statment->execute();
+            $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+            // username or email has already been taken
+            if(count($result) > 0){
+
+                $sql = "SELECT * FROM course WHERE idcourse = '$newID'";
+                $statment = $this->conn->prepare($sql);
+                $statment->execute();
+                $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+                if(count($result) > 0){
+                    return 3;
+                }else{
+                    
+                    $sql = "UPDATE course SET idcourse = '$newID', namecourse = '$newName', coursedesc = '$newDesc', image = '$newImage' WHERE idcourse = '$oldID'";
+                    $statment = $this->conn->prepare($sql);
+                    $statment->execute();
+                    $result = $statment->fetchAll(PDO::FETCH_OBJ);
+                    return 1;
+                }
+
+            }else {
+                
+                return 2;
+            }
+
+        }catch(PDOException $e){
+            echo $e->getMessage();
+        }
+    }
+}
 // class profile extends connection{
 
 //     public $username;

@@ -251,7 +251,7 @@ session_start();
                     <div class="course-content">
         
                       <h3 class="card-title">
-                        <a href="./discover/course.php?title='.$row->namecourse.'">'.$row->namecourse.'</a>
+                        <a href="./discover/course.php?id='.$row->idcourse.'&title='.$row->namecourse.'">'.$row->namecourse.'</a>
                       </h3>
         
                       <div class="wrapper border-bottom">

@@ -1370,3 +1370,17 @@ footer { background: var(--oxford-blue); }
   background-color: violet;
   margin-top: 10px;
 }
+
+.vid-info .subtitle{
+  font-weight: 300;
+  color: hsl(15, 100%, 55%);
+  font-size: 35px;
+  opacity: 0.6;
+}
+
+.course-description{
+  font-weight: 500;
+  color: black;
+  font-size: 35px;
+  opacity: 0.8;
+}

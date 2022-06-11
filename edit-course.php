@@ -9,7 +9,7 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
     $adminName = $_SESSION['user_name'];
     $adminImage = $_SESSION['user_image'];
 
-    $updateCategory = new updateCategory();
+    $updateCourse = new updateCourse();
     if(isset($_GET['id'])){
         $oldId = $_GET['id'];
     }
@@ -21,13 +21,19 @@ if(isset($_POST['update-course']) && isset($_GET['id'])){
     $newIdCategory = $_POST['category-id'];
     $newCourseName = $_POST['new-nameC'];
     $newCourseFor = $_POST['course-for'];
-    $newDate = $_POST[''];
+    $newDate = $_POST['new-date'];
+    $newCourseDesc = $_POST['new-course-desc'];
+    $teacher = $_POST['course-owner'];
+    $teacherImg = $_POST['teacher-profile'];
+    $language = $_POST['language'];
+    $CourseImg = $_POST['new-course-img'];
+    $CoursePath= $_POST['new-course-path'];
 
-    $result = $updateCategory->updateCategory($newID, $oldId, $newName, $newDesc, $newImage);
+    $result = $updateCourse->updateCourse($oldId, $newIdCourse, $newIdCategory, $newCourseName, $newCourseFor, $newDate, $newCourseDesc, $teacher, $teacherImg, $language, $CourseImg, $CoursePath);
 
     if($result == 1){
         // header("Location: ./signup.php");
-        echo "<script>alert('Your category has updated successfully!')</script>";
+        echo "<script>alert('Your course has updated successfully!')</script>";
         echo "<script>window.close();</script>";
     }
     if($result == 2){
@@ -37,7 +43,7 @@ if(isset($_POST['update-course']) && isset($_GET['id'])){
     }
     if($result == 3){
         // header("Location: ./login.php");
-        echo "<script>alert('Category id is already taken, please choose an other one!')</script>";
+        echo "<script>alert('Course id is already taken, please choose an other one!')</script>";
     }
 }
 
@@ -131,7 +137,7 @@ if(isset($_POST['update-course']) && isset($_GET['id'])){
 
                 <div class="form-group">
                     <label for="email">Teacher Profile :</label>
-                    <textarea name="new-course-path" value="<?php echo $_GET['teacherimg']; ?>" id="" cols="30" rows="5"><?php echo $_GET['teacherimg']; ?></textarea>
+                    <textarea name="teacher-profile" value="<?php echo $_GET['teacherimg']; ?>" id="" cols="30" rows="5"><?php echo $_GET['teacherimg']; ?></textarea>
                 </div>
 
                 <div class="form-group">

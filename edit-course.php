@@ -17,7 +17,7 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
 if(isset($_POST['update-course']) && isset($_GET['id'])){
     
     $oldId = $_GET['id'];
-    $newIdCourse = $_POST['new-idCo'];
+    // $newIdCourse = $_POST['new-idCo'];
     $newIdCategory = $_POST['category-id'];
     $newCourseName = $_POST['new-nameC'];
     $newCourseFor = $_POST['course-for'];
@@ -29,7 +29,7 @@ if(isset($_POST['update-course']) && isset($_GET['id'])){
     $CourseImg = $_POST['new-course-img'];
     $CoursePath= $_POST['new-course-path'];
 
-    $result = $updateCourse->updateCourse($oldId, $newIdCourse, $newIdCategory, $newCourseName, $newCourseFor, $newDate, $newCourseDesc, $teacher, $teacherImg, $language, $CourseImg, $CoursePath);
+    $result = $updateCourse->updateCourse($oldId, $newIdCategory, $newCourseName, $newCourseFor, $newDate, $newCourseDesc, $teacher, $teacherImg, $language, $CourseImg, $CoursePath);
 
     if($result == 1){
         // header("Location: ./signup.php");
@@ -40,10 +40,6 @@ if(isset($_POST['update-course']) && isset($_GET['id'])){
         // header("Location: ./login.php");
         echo "<script>alert('Problem!')</script>";
         echo "<script>window.open('./admin/dashboard.php','_self')</script>";
-    }
-    if($result == 3){
-        // header("Location: ./login.php");
-        echo "<script>alert('Course id is already taken, please choose an other one!')</script>";
     }
 }
 
@@ -77,10 +73,6 @@ if(isset($_POST['update-course']) && isset($_GET['id'])){
 
             <form action="edit-course.php?id=<?php echo $oldId; ?>&title=<?php echo $_GET['title']; ?>&desc=<?php echo $_GET['desc']; ?>&for=<?php echo $_GET['for']; ?>&img=<?php echo $_GET['img']; ?>&path=<?php echo $_GET['path']; ?>&idcat=<?php echo $_GET['idcat']; ?>&date=<?php echo $_GET['date']; ?>&teacher=<?php echo $_GET['teacher']; ?>&teacherimg=<?php echo $_GET['teacherimg']; ?>&language=<?php echo $_GET['language']; ?>" method="POST">
 
-                <div class="form-group">
-                    <label for="name">New id :</label>
-                    <input type="number" name="new-idCo" id="name" value="<?php echo $_GET['id']; ?>" class="form-control" placeholder="Enter your name">
-                </div>
 
                 <div class="form-group">
                     <label for="name">Category id :</label>

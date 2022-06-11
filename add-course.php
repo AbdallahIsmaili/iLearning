@@ -9,41 +9,27 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
     $adminName = $_SESSION['user_name'];
     $adminImage = $_SESSION['user_image'];
 
-    $updateCourse = new updateCourse();
-    if(isset($_GET['id'])){
-        $oldId = $_GET['id'];
-    }
+    $newCourse = new newCourse();
 
-if(isset($_POST['update-course']) && isset($_GET['id'])){
-    
-    $oldId = $_GET['id'];
-    $newIdCourse = $_POST['new-idCo'];
-    $newIdCategory = $_POST['category-id'];
-    $newCourseName = $_POST['new-nameC'];
-    $newCourseFor = $_POST['course-for'];
-    $newDate = $_POST['new-date'];
-    $newCourseDesc = $_POST['new-course-desc'];
+if(isset($_POST['add-course'])){
+    $idCategory = $_POST['category-id'];
+    $CourseName = $_POST['course-name'];
+    $CourseFor = $_POST['course-for'];
+    $courseDate = $_POST['course-date'];
+    $CourseDesc = $_POST['course-desc'];
     $teacher = $_POST['course-owner'];
     $teacherImg = $_POST['teacher-profile'];
     $language = $_POST['language'];
-    $CourseImg = $_POST['new-course-img'];
-    $CoursePath= $_POST['new-course-path'];
+    $CourseImg = $_POST['course-img'];
+    $CoursePath= $_POST['course-path'];
+    $CourseLength= $_POST['length'];
 
-    $result = $updateCourse->updateCourse($oldId, $newIdCourse, $newIdCategory, $newCourseName, $newCourseFor, $newDate, $newCourseDesc, $teacher, $teacherImg, $language, $CourseImg, $CoursePath);
+    $result = $newCourse->newCourse($idCategory, $CourseName, $CourseFor, $courseDate, $CourseDesc, $teacher, $teacherImg, $language, $CourseImg, $CoursePath, $CourseLength);
 
     if($result == 1){
-        // header("Location: ./signup.php");
-        echo "<script>alert('Your course has updated successfully!')</script>";
-        echo "<script>window.close();</script>";
-    }
-    if($result == 2){
         // header("Location: ./login.php");
-        echo "<script>alert('Problem!')</script>";
+        echo "<script>alert('The Course has been added successfully!')</script>";
         echo "<script>window.open('./admin/dashboard.php','_self')</script>";
-    }
-    if($result == 3){
-        // header("Location: ./login.php");
-        echo "<script>alert('Course id is already taken, please choose an other one!')</script>";
     }
 }
 
@@ -62,35 +48,23 @@ if(isset($_POST['update-course']) && isset($_GET['id'])){
     <!----===== Iconscout CSS ===== -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 
-    <title>Edit - <?php echo $_GET['title']; ?></title> 
+    <title>Add New Course</title> 
 </head>
 <body>
     
 <section class="login-form">
-            <p class="section-subtitle">Update <?php echo $_GET['title']; ?>!!</p>
+            <p class="section-subtitle">Add A New Course!!</p>
             <br>
         <br>
         <br>
 
-        
-        
-
-            <form action="edit-course.php?id=<?php echo $oldId; ?>&title=<?php echo $_GET['title']; ?>&desc=<?php echo $_GET['desc']; ?>&for=<?php echo $_GET['for']; ?>&img=<?php echo $_GET['img']; ?>&path=<?php echo $_GET['path']; ?>&idcat=<?php echo $_GET['idcat']; ?>&date=<?php echo $_GET['date']; ?>&teacher=<?php echo $_GET['teacher']; ?>&teacherimg=<?php echo $_GET['teacherimg']; ?>&language=<?php echo $_GET['language']; ?>" method="POST">
-
-                <div class="form-group">
-                    <label for="name">New id :</label>
-                    <input type="number" name="new-idCo" id="name" value="<?php echo $_GET['id']; ?>" class="form-control" placeholder="Enter your name">
-                </div>
+            <form action="add-course.php" method="POST">
 
                 <div class="form-group">
                     <label for="name">Category id :</label>
-
                     <select name="category-id" id="">
-                        <option value="<?php echo $_GET['idcat']; ?>" selected><?php echo $_GET['idcat']; ?></option>
                         
                         <?php
-
-                            $idC = $_GET['idcat'];
 
                             $host = "localhost";
                             $user = "root";
@@ -109,7 +83,7 @@ if(isset($_POST['update-course']) && isset($_GET['id'])){
 
                             foreach ($result as $val) {
                                 # code...
-                                echo "<option value=".$val->idcategory.">".$val->idcategory."</option>";
+                                echo "<option value=".$val->idcategory.">".$val->namecategory."</option>";
                             }
 
                         }catch(PDOException $e){
@@ -121,54 +95,59 @@ if(isset($_POST['update-course']) && isset($_GET['id'])){
                 </div>
 
                 <div class="form-group">
-                    <label for="email">New course Name :</label>
-                    <input type="text" name="new-nameC" id="email" value="<?php echo $_GET['title']; ?>" class="form-control" placeholder="Enter your email">
+                    <label for="email">Course Name :</label>
+                    <input type="text" name="course-name" id="email" class="form-control" placeholder="Enter your email">
                 </div>
 
                 <div class="form-group">
                     <label for="email">Course Publish Date :</label>
-                    <input type="date" name="new-date" id="email" value="<?php echo $_GET['date']; ?>" class="form-control" placeholder="Enter your email">
+                    <input type="date" name="course-date" id="email" class="form-control" placeholder="Enter your email">
                 </div>
 
                 <div class="form-group">
                     <label for="email">The Owner :</label>
-                    <input type="text" name="course-owner" id="email" value="<?php echo $_GET['teacher']; ?>" class="form-control" placeholder="Enter your email">
+                    <input type="text" name="course-owner" id="email" class="form-control" placeholder="Enter your email">
                 </div>
 
                 <div class="form-group">
                     <label for="email">Teacher Profile :</label>
-                    <textarea name="teacher-profile" value="<?php echo $_GET['teacherimg']; ?>" id="" cols="30" rows="5"><?php echo $_GET['teacherimg']; ?></textarea>
+                    <textarea name="teacher-profile" id="" cols="30" rows="5"></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="email">New course Desc :</label>
-                    <textarea name="new-course-desc" value="<?php echo $_GET['desc']; ?>" id="" cols="30" rows="5"><?php echo $_GET['desc']; ?></textarea>
+                    <label for="email">Course Desc :</label>
+                    <textarea name="course-desc" id="" cols="30" rows="5"></textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="email">Course for :</label>
-                    <input type="text" name="course-for" id="email" value="<?php echo $_GET['for']; ?>" class="form-control" placeholder="Enter your email">
+                    <input type="text" name="course-for" id="email" class="form-control" placeholder="Enter your email">
                 </div>
 
                 <div class="form-group">
-                    <label for="email">New course image :</label>
-                    <textarea name="new-course-img" value="<?php echo $_GET['img']; ?>" id="" cols="30" rows="5"><?php echo $_GET['img']; ?></textarea>
+                    <label for="email">Course image :</label>
+                    <textarea name="course-img" id="" cols="30" rows="5"></textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="email">Course path :</label>
-                    <textarea name="new-course-path" value="<?php echo $_GET['path']; ?>" id="" cols="30" rows="5"><?php echo $_GET['path']; ?></textarea>
+                    <textarea name="course-path" id="" cols="30" rows="5"></textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="email">Course Language :</label>
-                    <input type="text" name="language" id="email" value="<?php echo $_GET['language']; ?>" class="form-control" placeholder="Enter your email">
+                    <input type="text" name="language" id="email" class="form-control" placeholder="Enter your email">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Course Length :</label>
+                    <input type="text" name="length" id="email" class="form-control" placeholder="Enter your email">
                 </div>
 
                 <br>
         <br>
                 <div class="form-group">
-                    <button type="submit" name="update-course" class="btn btn-primary">Update course info</button>
+                    <button type="submit" name="add-course" class="btn btn-primary">Add This Course!</button>
                 </div>
             </form>
             <!-- <a href="./config/connect.php">test</a> -->

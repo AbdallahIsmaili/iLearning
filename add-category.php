@@ -20,8 +20,6 @@ if(isset($_POST['add-category'])){
 
     $result = $newCategory->newCategory($nameCategory, $categoryDesc, $categoryImage);
 
-    echo $result;
-
     if($result == 1){
         // header("Location: ./signup.php");
         echo "<script>alert('This category has already found!')</script>";

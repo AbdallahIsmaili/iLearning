@@ -16,13 +16,13 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
 
 if(isset($_POST['update-category']) && isset($_GET['id'])){
 
-    $newID = $_POST['new-idC'];
+    // $newID = $_POST['new-idC'];
     $newName = $_POST['new-nameC'];
     $oldId = $_GET['id'];
     $newDesc = $_POST['new-category-desc'];
     $newImage = $_POST['new-category-img'];
 
-    $result = $updateCategory->updateCategory($newID, $oldId, $newName, $newDesc, $newImage);
+    $result = $updateCategory->updateCategory($oldId, $newName, $newDesc, $newImage);
 
     if($result == 1){
         // header("Location: ./signup.php");
@@ -65,10 +65,7 @@ if(isset($_POST['update-category']) && isset($_GET['id'])){
         <br>
         <br>
             <form action="edit-category.php?id=<?php echo $oldId; ?>&title=<?php echo $_GET['title']; ?>&desc=<?php echo $_GET['desc']; ?>&img=<?php echo $_GET['img']; ?>" method="POST">
-                <div class="form-group">
-                    <label for="name">New id :</label>
-                    <input type="number" name="new-idC" id="name" value="<?php echo $_GET['id']; ?>" class="form-control" placeholder="Enter your name">
-                </div>
+
                 <div class="form-group">
                     <label for="email">New Category Name :</label>
                     <input type="text" name="new-nameC" id="email" value="<?php echo $_GET['title']; ?>" class="form-control" placeholder="Enter your email">

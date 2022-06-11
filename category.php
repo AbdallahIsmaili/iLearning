@@ -244,14 +244,14 @@ session_start();
                       <img src="'.$row->image.'" alt="course banner">
         
                       <div class="course-tag-box">
-                        <a href="#" class="badge-tag orange">'.$row->coursefor.'</a>
+                        <a href="category.php?idcategory='.$row->idcategory.'" class="badge-tag orange">'.$row->coursefor.'</a>
                       </div>
                     </div>
         
                     <div class="course-content">
         
                       <h3 class="card-title">
-                        <a href="#">'.$row->namecourse.'</a>
+                        <a href="./discover/course.php">'.$row->namecourse.'</a>
                       </h3>
         
                       <div class="wrapper border-bottom">
@@ -259,7 +259,7 @@ session_start();
                         <div class="author">
                           <img src="'.$row->teacherimage.'" alt="course instructor image" class="author-img">
         
-                          <a href="#" class="author-name">'.$row->teacher.'</a>
+                          <a href="./discover/teacher.php" class="author-name">'.$row->teacher.'</a>
                         </div>
         
                       </div>

@@ -1384,3 +1384,9 @@ footer { background: var(--oxford-blue); }
   font-size: 35px;
   opacity: 0.8;
 }
+
+.back-btn{
+  width: 20%;
+  margin: auto;
+  text-align: center;
+}

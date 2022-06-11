@@ -195,15 +195,6 @@ session_start();
                 $statement->execute();
                 $result = $statement->fetchAll(PDO::FETCH_OBJ);
 
-                // if(count($result) > 0)
-                //     {
-                //         $username = $result[0]->name;
-                //         $userEmail = $result[0]->email;
-                //         $userPassword = $result[0]->password;
-                //         $userGender = $result[0]->sex;
-                //         $userIdImage = $result[0]->idimage;
-                //     }
-
                 $txt = "Online Courses For ".$result[0]->namecategory.""; 
 
                 echo "<h2 class='section-title'>".$txt."</h2>" ;
@@ -288,11 +279,6 @@ session_start();
           
 
         </div>
-
-        <!-- <button class="btn btn-primary">
-          <p class="btn-text">View All Course</p>
-          <span class="square"></span>
-        </button> -->
 
       </section>
 

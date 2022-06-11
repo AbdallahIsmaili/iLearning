@@ -150,6 +150,24 @@ if(isset($_SESSION['user_email'])){
 
             </div>
 
+            <br>
+            <br>
+
+            <div class="comments-form">
+                
+                <p><?php echo $_SESSION['user_name'] ?></p>
+                <p class=""><?php echo $_SESSION['user_email'] ?></p>
+                <form action="discover/course.php?id=<?php echo $courseId ?>&title=<?php echo $courseTitle ?>" method="post">
+            
+                    <div class="form-group">
+                        <label for="email">Comment content :</label>
+                        <textarea name="comment-content" placeholder="Enter your comment" cols="30" rows="5"></textarea>
+                    </div>
+                    <button>add this comment</button>
+
+                </form>
+            </div>
+
         </section>
 
         <!-- Recommanded Courses -->
@@ -251,6 +269,11 @@ if(isset($_SESSION['user_email'])){
         </div>
 
       </section>
+
+        <a class="back-btn btn btn-secondary" href="user/profile.php">
+            <p class="btn-text">back to courses!</p>
+            <span class="square"></span>
+        </a>
 
     </div>
 

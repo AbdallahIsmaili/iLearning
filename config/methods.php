@@ -578,6 +578,52 @@ class updateCourse extends connection{
         }
     }
 }
+
+// DELETE A COURSE FUNCTION
+
+if(isset($_GET['action']) && isset($_GET['idcourse']) && $_GET['action'] == 'delete'){
+
+    if(isset($_GET['idcourse'])){
+        $idC = $_GET['idcourse'];
+    }
+
+$host = "localhost";
+$user = "root";
+$pass = "";
+$db = "elearning";
+$conn;
+
+try{
+    $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $sql = "DELETE FROM course WHERE idcourse = :idcourse";
+    $statement = $conn->prepare($sql);
+
+    $data = [
+        'idcourse' => $idC
+
+    ];
+    $result = $statement->execute($data);
+
+    if($result)
+    {
+        echo "<script>alert('The Course Deleted Successfully!');</script>";
+        echo "<script>window.location.href='./admin/dashboard.php';</script>";
+        // exit(0);
+    }
+    else
+    {
+        echo "<script>alert('The Course did not Deleted!');</script>";
+        // exit(0);
+    }
+
+}catch(PDOException $e){
+    echo $e->getMessage();
+}
+
+}
+
 // class profile extends connection{
 
 //     public $username;

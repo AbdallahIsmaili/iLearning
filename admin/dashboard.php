@@ -1185,6 +1185,38 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
                 </div>
 
                 <div class="data joined">
+                    <span class="data-title">Is active: </span>
+                    <?php
+
+                        $host = "localhost";
+                        $user = "root";
+                        $pass = "";
+                        $db = "elearning";
+                        $conn;
+
+                        try{
+                            $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                            $sql = "SELECT * FROM events ORDER BY still DESC";
+                            $statment = $conn->prepare($sql);
+                            $statment->execute();
+                            $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+                            if(count($result) > 0){
+                                foreach($result as $row){
+                                    echo "<span class='data-list'>".$row->still."</span>";
+                                }
+                            }else{
+                                echo "<script>alert('We run into a Problem!!');</script>";
+                            }
+                        }catch(PDOException $e){
+                            echo $e->getMessage();
+                        }
+
+                    ?>
+                </div>
+
+                <div class="data joined">
                     <span class="data-title">Actions</span>
                     <?php
 
@@ -1204,7 +1236,13 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
 
                             if(count($result) > 0){
                                 foreach($result as $row){
-                                    echo "<div class='data-list'><a href='../edit-event.php?id=".$row->idevent."&title=".$row->title."&desc=".$row->details."&in=".$row->place."&at=".$row->startingTime."&to=".$row->endingTime."&date=".$row->date."&action=editevent' target='_blank'>Edit</a> | <a href='../index.php?idevent=".$row->idevent."&action=delete'>Delete</a> | <a href='../index.php?idevent=".$row->idevent."&action=launch' name='launch-event'>Launch</a></div>";
+                                    if($row->still == 0){
+                                        $launching = 'Launch';
+                                    }else if($row->still == 1){
+                                        $launching = 'Stop';
+                                    }
+
+                                    echo "<div class='data-list'><a href='../edit-event.php?id=".$row->idevent."&title=".$row->title."&desc=".$row->details."&in=".$row->place."&at=".$row->startingTime."&to=".$row->endingTime."&date=".$row->date."&action=editevent' target='_blank'>Edit</a> | <a href='../index.php?idevent=".$row->idevent."&action=delete'>Delete</a> | <a href='../index.php?idevent=".$row->idevent."&still=".$row->still."&action=launch' name='launch-event'>".$launching."</a></div>";
                                 }
                             }else{
                                 echo "<script>alert('We run into a Problem!!');</script>";

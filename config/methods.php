@@ -711,6 +711,106 @@ class newEvent extends connection{
     }
 }
 
+// DELETE AN EVENT
+
+if(isset($_GET['action']) && isset($_GET['idevent']) && $_GET['action'] == 'delete'){
+
+    if(isset($_GET['idevent'])){
+        $idE = $_GET['idevent'];
+    }
+
+$host = "localhost";
+$user = "root";
+$pass = "";
+$db = "elearning";
+$conn;
+
+try{
+    $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $sql = "DELETE FROM events WHERE idevent = :idevent";
+    $statement = $conn->prepare($sql);
+
+    $data = [
+        'idevent' => $idE
+
+    ];
+    $result = $statement->execute($data);
+
+    if($result)
+    {
+        echo "<script>alert('The event Deleted Successfully!');</script>";
+        echo "<script>window.open('./admin/dashboard.php','_self')</script>";
+    }
+    else
+    {
+        echo "<script>alert('The event did not Deleted!');</script>";
+    }
+
+}catch(PDOException $e){
+    echo $e->getMessage();
+}
+
+}
+
+// LAUNCH AN EVENT
+
+if(isset($_GET['action']) && isset($_GET['idevent']) && isset($_GET['still']) && $_GET['action'] == 'launch'){
+
+    if(isset($_GET['idevent'])){
+        $idE = $_GET['idevent'];
+    }
+
+$host = "localhost";
+$user = "root";
+$pass = "";
+$db = "elearning";
+$conn;
+
+try{
+    $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    if($_GET['still'] == 0){
+        $sql = "UPDATE events SET still = 1 WHERE idevent = :idevent";
+        $respond = 1;
+    }else {
+        $sql = "UPDATE events SET still = 0 WHERE idevent = :idevent";
+        $respond = 0;
+    }
+
+    $statement = $conn->prepare($sql);
+
+    $data = [
+        'idevent' => $idE
+
+    ];
+    $result = $statement->execute($data);
+
+    if($result)
+    {
+        if($respond == 0){
+            echo "<script>alert('The event cancelled Successfully!');</script>";
+            echo "<script>window.open('./admin/dashboard.php','_self')</script>";
+
+        }else{
+            echo "<script>alert('The event launched Successfully!');</script>";
+            echo "<script>window.open('./admin/dashboard.php','_self')</script>";
+        }
+        
+    }
+    else
+    {
+        echo "<script>alert('The event did not launched via an error!');</script>";
+    }
+
+}catch(PDOException $e){
+    echo $e->getMessage();
+}
+
+}
+
 
 // class profile extends connection{
 

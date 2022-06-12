@@ -16,27 +16,24 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
 
 if(isset($_POST['update-event']) && isset($_GET['id'])){
 
-    // $newID = $_POST['new-idC'];
-    $newName = $_POST['new-nameC'];
-    $oldId = $_GET['id'];
-    $newDesc = $_POST['new-category-desc'];
-    $newImage = $_POST['new-category-img'];
+    $eventTitle = $_POST['event-title'];
+    $eventDate = $_POST['event-date'];
+    $eventStarting = $_POST['event-starting'];
+    $eventEnding = $_POST['event-ending'];
+    $eventWhere = $_POST['where'];
+    $eventDetails = $_POST['event-details'];
 
-    $result = $updateEvent->updateEvent($oldId, $newName, $newDesc, $newImage);
+    $result = $updateEvent->updateEvent($oldId, $eventTitle, $eventDate, $eventStarting, $eventEnding, $eventWhere, $eventDetails);
 
     if($result == 1){
         // header("Location: ./signup.php");
-        echo "<script>alert('Your category has updated successfully!')</script>";
+        echo "<script>alert('Your event has updated successfully!')</script>";
         echo "<script>window.close();</script>";
     }
     if($result == 2){
         // header("Location: ./login.php");
         echo "<script>alert('Problem!')</script>";
         echo "<script>window.open('./admin/dashboard.php','_self')</script>";
-    }
-    if($result == 3){
-        // header("Location: ./login.php");
-        echo "<script>alert('Category id is already taken, please choose an other one!')</script>";
     }
 }
 
@@ -60,11 +57,12 @@ if(isset($_POST['update-event']) && isset($_GET['id'])){
 <body>
     
 <section class="login-form">
-            <p class="section-subtitle">Update <?php echo $_GET['title']; ?> category !!</p>
+            <p class="section-subtitle">Update <?php echo $_GET['title']; ?> event !!</p>
             <br>
         <br>
         <br>
-        <form action="add-event.php" method="POST">
+        
+        <form action="edit-event.php?id=<?php echo $_GET['id'];?>&title=<?php echo $_GET['title'];?>&desc=<?php echo $_GET['desc'];?>&in=<?php echo $_GET['in'];?>&at=<?php echo $_GET['at'];?>&to=<?php echo $_GET['to'];?>&date=<?php echo $_GET['date'];?>" method="POST">
 
             <div class="form-group">
                 <label for="email">Event title: </label>
@@ -102,7 +100,6 @@ if(isset($_POST['update-event']) && isset($_GET['id'])){
                 <button type="submit" name="update-event" class="btn btn-primary">Update this event</button>
             </div>
             </form>
-            <!-- <a href="./config/connect.php">test</a> -->
 
         </section>
 
@@ -112,7 +109,7 @@ if(isset($_POST['update-event']) && isset($_GET['id'])){
 <?php
 }
 else{
-  header("Location: ./signin.php");
+  header("Location: signin.php");
 }
 
 ?>

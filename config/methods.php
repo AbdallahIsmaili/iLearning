@@ -811,6 +811,43 @@ try{
 
 }
 
+// UPDATE AN EVENT CLASS
+
+
+class updateEvent extends connection{
+
+    public function updateEvent($oldID, $eventTitle, $eventDate, $eventStarting, $eventEnding, $eventWhere, $eventDetails){
+
+        try{
+            
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $sql = "SELECT * FROM events WHERE idevent = '$oldID'";
+
+            $statment = $this->conn->prepare($sql);
+            $statment->execute();
+            $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+            if(count($result) > 0){
+
+                $sql = "UPDATE events SET title = '$eventTitle', date = '$eventDate', startingTime = '$eventStarting', endingTime = '$eventEnding', place = '$eventWhere', details = '$eventDetails' WHERE idevent = '$oldID'";
+                $statment = $this->conn->prepare($sql);
+                $statment->execute();
+                $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+                return 1;
+
+            }else {
+                
+                return 2;
+            }
+
+        }catch(PDOException $e){
+            echo $e->getMessage();
+        }
+    }
+}
+
 
 // class profile extends connection{
 

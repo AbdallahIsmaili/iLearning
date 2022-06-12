@@ -848,6 +848,29 @@ class updateEvent extends connection{
     }
 }
 
+// PUBLISH A NEW MESSAGE
+
+class newMessage extends connection{
+
+    public function newMessage($senderName, $senderEmail, $senderMessage, $senderSESSIONemail, $senderSESSIONimage){
+
+        try{
+            
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);  
+            $sql = "INSERT INTO messages (email, name, content, trueEmail, image) VALUES ('$senderEmail', '$senderName', '$senderMessage', '$senderSESSIONemail', '$senderSESSIONimage')";
+
+            $statment = $this->conn->prepare($sql);
+            $statment->execute();
+            $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+            return 1;
+
+        }catch(PDOException $e){
+            echo $e->getMessage();
+        }
+    }
+}
+
 
 // class profile extends connection{
 

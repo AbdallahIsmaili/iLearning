@@ -56,19 +56,19 @@ session_start();
         <ul class="navbar-nav">
 
           <li class="nav-item">
-            <a href="#">Home</a>
+            <a href="index.php">Home</a>
           </li>
           <li class="nav-item">
-            <a href="#about">About Us</a>
+            <a href="./infos/about.php">About Us</a>
           </li>
           <li class="nav-item">
             <a href="categories.php">Categories</a>
           </li>
           <li class="nav-item">
-            <a href="#blog">Blog</a>
+            <a href="./discover/blog.php">Blog</a>
           </li>
           <li class="nav-item">
-            <a href="#contact">Contact Us</a>
+            <a href="./infos/contact.php" target="_blank">Contact Us</a>
           </li>
         </ul>
 

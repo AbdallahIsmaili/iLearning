@@ -62,7 +62,7 @@ session_start();
             <a href="#about">About Us</a>
           </li>
           <li class="nav-item">
-            <a href="categories.php">Courses</a>
+            <a href="categories.php">Categories</a>
           </li>
           <li class="nav-item">
             <a href="#blog">Blog</a>
@@ -138,15 +138,15 @@ session_start();
           </p>
 
           <div class="home-btn-group">
-            <button class="btn btn-primary">
+            <a class="btn btn-primary" href="categories.php">
               <p class="btn-text">Explore Courses</p>
               <span class="square"></span>
-            </button>
+            </a>
 
-            <button class="btn btn-secondary">
+            <a class="btn btn-secondary" href="./infos/contact.php">
               <p class="btn-text">Contact Us</p>
               <span class="square"></span>
-            </button>
+            </a>
           </div>
 
         </div>
@@ -181,135 +181,58 @@ session_start();
 
         <p class="section-subtitle">Course Category</p>
 
-        <h2 class="section-title">Explore Popular Courses</h2>
+        <h2 class="section-title">Explore Out Categories</h2>
 
         <ul class="course-item-group">
 
-          <li class="course-category-item">
+          <!-- Get categories from database -->
 
-            <div class="wrapper">
-              <img src="./assets/images/course-category-icon-1.png" alt="category icon" class="category-icon default">
+          <?php
 
-              <img src="./assets/images/course-category-icon-1-w.png" alt="category icon white"
-                class="category-icon hover">
-            </div>
+            $host = "localhost";
+            $user = "root";
+            $pass = "";
+            $db = "elearning";
 
-            <div class="course-category-content">
-              <h3 class="category-title">
-                <a href="#">Learn Data Science</a>
-              </h3>
+            try{
+                $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-              <p class="category-subtitle">Data is Everything</p>
-            </div>
+                $sql = "SELECT * FROM category ORDER BY idcategory";
+                $statement = $conn->prepare($sql);
+                $statement->execute();
+                $result = $statement->fetchAll(PDO::FETCH_OBJ);
 
-          </li>
+                foreach($result as $row){
+                    echo '<li class="course-category-item">
+                            <div class="wrapper">
+                            <img src="'.$row->image.'" alt="category icon" class="category-icon default">
+                
+                            <img src="'.$row->image.'" alt="category icon white"
+                                class="category-icon hover">
+                            </div>
+                
+                            <div class="course-category-content">
+                            <h3 class="category-title">
+                            <a href="category.php?idcategory='.$row->idcategory.'">'.$row->namecategory.'</a>
+                            </h3>
+                
+                            <p class="category-subtitle">'.$row->categorydesc.'</p>
+                            </div>
+                
+                        </li>';
+                }
 
-
-          <li class="course-category-item">
-
-            <div class="wrapper">
-              <img src="./assets/images/course-category-icon-2.png" alt="category icon" class="category-icon default">
-
-              <img src="./assets/images/course-category-icon-2-w.png" alt="category icon white"
-                class="category-icon hover">
-            </div>
-
-            <div class="course-category-content">
-              <h3 class="category-title">
-                <a href="#">Business Strategy</a>
-              </h3>
-
-              <p class="category-subtitle">Improve your business</p>
-            </div>
-
-          </li>
-
-
-          <li class="course-category-item">
-
-            <div class="wrapper">
-              <img src="./assets/images/course-category-icon-3.png" alt="category icon" class="category-icon default">
-
-              <img src="./assets/images/course-category-icon-3-w.png" alt="category icon white"
-                class="category-icon hover">
-            </div>
-
-            <div class="course-category-content">
-              <h3 class="category-title">
-                <a href="#">Learn Art & Design</a>
-              </h3>
-
-              <p class="category-subtitle">Fun & Challenging</p>
-            </div>
-
-          </li>
+            }catch(PDOException $e){
+                echo $e->getMessage();
+            }
 
 
-          <li class="course-category-item">
-
-            <div class="wrapper">
-              <img src="./assets/images/course-category-icon-4.png" alt="category icon" class="category-icon default">
-
-              <img src="./assets/images/course-category-icon-4-w.png" alt="category icon white"
-                class="category-icon hover">
-            </div>
-
-            <div class="course-category-content">
-              <h3 class="category-title">
-                <a href="#">Learn Lifestyle</a>
-              </h3>
-
-              <p class="category-subtitle">New Skills, New You</p>
-            </div>
-
-          </li>
-
-
-          <li class="course-category-item">
-
-            <div class="wrapper">
-              <img src="./assets/images/course-category-icon-5.png" alt="category icon" class="category-icon default">
-
-              <img src="./assets/images/course-category-icon-5-w.png" alt="category icon white"
-                class="category-icon hover">
-            </div>
-
-            <div class="course-category-content">
-              <h3 class="category-title">
-                <a href="#">Learn Marketing</a>
-              </h3>
-
-              <p class="category-subtitle">Improve your business</p>
-            </div>
-
-          </li>
-
-
-          <li class="course-category-item">
-
-            <div class="wrapper">
-              <img src="./assets/images/course-category-icon-6.png" alt="category icon" class="category-icon default">
-
-              <img src="./assets/images/course-category-icon-6-w.png" alt="category icon white"
-                class="category-icon hover">
-            </div>
-
-            <div class="course-category-content">
-              <h3 class="category-title">
-                <a href="#">Learn Finance</a>
-              </h3>
-
-              <p class="category-subtitle">Fun & Challenging</p>
-            </div>
-
-          </li>
+          ?>
 
         </ul>
 
       </section>
-
-
-
 
 
       <!--
@@ -382,311 +305,76 @@ session_start();
       <section class="course" id="course">
 
         <p class="section-subtitle">Our Online Courses</p>
-
-        <h2 class="section-title">Find The Right Online Course For You</h2>
+        <h2 class='section-title'>Here is the latest courses in our site.</h2>
 
         <div class="course-grid">
 
-          <div class="course-card">
 
-            <div class="course-banner">
-              <img src="./assets/images/course-1.jpg" alt="course banner">
-
-              <div class="course-tag-box">
-                <a href="#" class="badge-tag orange">Business</a>
-                <a href="#" class="badge-tag blue">Marketing</a>
-              </div>
-            </div>
-
-            <div class="course-content">
-
-              <h3 class="card-title">
-                <a href="#">Become product manager learn skills.</a>
-              </h3>
-
-              <div class="wrapper border-bottom">
-
-                <div class="author">
-                  <img src="./assets/images/course-instructor-img.jpg" alt="course instructor image" class="author-img">
-
-                  <a href="#" class="author-name">Lillian Wals</a>
-                </div>
-
-                <div class="rating">
-                  <ion-icon name="star"></ion-icon>
-                  <p>5.0 (2k)</p>
-                </div>
-
-              </div>
-
-              <div class="wrapper">
-                <div class="course-price">$50.00</div>
-
-                <div class="enrolled">
-                  <div class="icon-user">
-                    <img src="./assets/images/student-icon.png" alt="user icon">
-                  </div>
-
-                  <p>600k</p>
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <div class="course-card">
-
-            <div class="course-banner">
-              <img src="./assets/images/course-2.jpg" alt="course banner">
-
-              <div class="course-tag-box">
-                <a href="#" class="badge-tag orange">Business</a>
-                <a href="#" class="badge-tag blue">Marketing</a>
-              </div>
-            </div>
-
-            <div class="course-content">
-
-              <h3 class="card-title">
-                <a href="#">Fashion and luxury fashion in a changing.</a>
-              </h3>
-
-              <div class="wrapper border-bottom">
-
-                <div class="author">
-                  <img src="./assets/images/course-instructor-img.jpg" alt="course instructor image" class="author-img">
-
-                  <a href="#" class="author-name">Lillian Wals</a>
-                </div>
-
-                <div class="rating">
-                  <ion-icon name="star"></ion-icon>
-                  <p>4.7 (5k)</p>
-                </div>
-
-              </div>
-
-              <div class="wrapper">
-                <div class="course-price">$80.00</div>
-
-                <div class="enrolled">
-                  <div class="icon-user">
-                    <img src="./assets/images/student-icon.png" alt="user icon">
-                  </div>
-
-                  <p>545k</p>
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <div class="course-card">
-
-            <div class="course-banner">
-              <img src="./assets/images/course-3.jpg" alt="course banner">
-
-              <div class="course-tag-box">
-                <a href="#" class="badge-tag orange">Business</a>
-                <a href="#" class="badge-tag blue">Marketing</a>
-              </div>
-            </div>
-
-            <div class="course-content">
-
-              <h3 class="card-title">
-                <a href="#">Learning to write as a professional.</a>
-              </h3>
-
-              <div class="wrapper border-bottom">
-
-                <div class="author">
-                  <img src="./assets/images/course-instructor-img.jpg" alt="course instructor image" class="author-img">
-
-                  <a href="#" class="author-name">Lillian Wals</a>
-                </div>
-
-                <div class="rating">
-                  <ion-icon name="star"></ion-icon>
-                  <p>4.1 (3k)</p>
-                </div>
-
-              </div>
-
-              <div class="wrapper">
-                <div class="course-price">$29.90</div>
-
-                <div class="enrolled">
-                  <div class="icon-user">
-                    <img src="./assets/images/student-icon.png" alt="user icon">
-                  </div>
-
-                  <p>317k</p>
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <div class="course-card">
-
-            <div class="course-banner">
-              <img src="./assets/images/course-4.jpg" alt="course banner">
-
-              <div class="course-tag-box">
-                <a href="#" class="badge-tag orange">Business</a>
-                <a href="#" class="badge-tag blue">Marketing</a>
-              </div>
-            </div>
-
-            <div class="course-content">
-
-              <h3 class="card-title">
-                <a href="#">Improving accessibility of Your markdown.</a>
-              </h3>
-
-              <div class="wrapper border-bottom">
-
-                <div class="author">
-                  <img src="./assets/images/course-instructor-img.jpg" alt="course instructor image" class="author-img">
-
-                  <a href="#" class="author-name">Lillian Wals</a>
-                </div>
-
-                <div class="rating">
-                  <ion-icon name="star"></ion-icon>
-                  <p>4.8 (3.9k)</p>
-                </div>
-
-              </div>
-
-              <div class="wrapper">
-                <div class="course-price">$49.90</div>
-
-                <div class="enrolled">
-                  <div class="icon-user">
-                    <img src="./assets/images/student-icon.png" alt="user icon">
-                  </div>
-
-                  <p>891k</p>
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-
-
-
-          <div class="course-card">
-
-            <div class="course-banner">
-              <img src="./assets/images/course-5.jpg" alt="course banner">
-
-              <div class="course-tag-box">
-                <a href="#" class="badge-tag orange">Business</a>
-                <a href="#" class="badge-tag blue">Marketing</a>
-              </div>
-            </div>
-
-            <div class="course-content">
-
-              <h3 class="card-title">
-                <a href="#">Master query in a short period of time.</a>
-              </h3>
-
-              <div class="wrapper border-bottom">
-
-                <div class="author">
-                  <img src="./assets/images/course-instructor-img.jpg" alt="course instructor image" class="author-img">
-
-                  <a href="#" class="author-name">Lillian Wals</a>
-                </div>
-
-                <div class="rating">
-                  <ion-icon name="star"></ion-icon>
-                  <p>3.8 (1k)</p>
-                </div>
-
-              </div>
-
-              <div class="wrapper">
-                <div class="course-price">$89.00</div>
-
-                <div class="enrolled">
-                  <div class="icon-user">
-                    <img src="./assets/images/student-icon.png" alt="user icon">
-                  </div>
-
-                  <p>204k</p>
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <div class="course-card">
-
-            <div class="course-banner">
-              <img src="./assets/images/course-6.jpg" alt="course banner">
-
-              <div class="course-tag-box">
-                <a href="#" class="badge-tag orange">Business</a>
-                <a href="#" class="badge-tag blue">Marketing</a>
-              </div>
-            </div>
-
-            <div class="course-content">
-
-              <h3 class="card-title">
-                <a href="#">Business Intelligence analyst Course 2022.</a>
-              </h3>
-
-              <div class="wrapper border-bottom">
-
-                <div class="author">
-                  <img src="./assets/images/course-instructor-img.jpg" alt="course instructor image" class="author-img">
-
-                  <a href="#" class="author-name">Lillian Wals</a>
-                </div>
-
-                <div class="rating">
-                  <ion-icon name="star"></ion-icon>
-                  <p>4.9 (23k)</p>
-                </div>
-
-              </div>
-
-              <div class="wrapper">
-                <div class="course-price">$199.00</div>
-
-                <div class="enrolled">
-                  <div class="icon-user">
-                    <img src="./assets/images/student-icon.png" alt="user icon">
-                  </div>
-
-                  <p>1.3M</p>
-                </div>
-              </div>
-
-            </div>
-
-          </div>
+        <?php
+
+            $host = "localhost";
+            $user = "root";
+            $pass = "";
+            $db = "elearning";
+
+            try{
+                $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                $sql = "SELECT * FROM course ORDER BY idcourse DESC";
+                $statement = $conn->prepare($sql);
+                $statement->execute();
+                $result = $statement->fetchAll(PDO::FETCH_OBJ);
+
+                foreach($result as $row){
+                    echo '<div class="course-card">
+
+                    <div class="course-banner">
+                      <img src="'.$row->image.'" alt="course banner">
+        
+                      <div class="course-tag-box">
+                        <a href="category.php?idcategory='.$row->idcategory.'" class="badge-tag orange">'.$row->coursefor.'</a>
+                      </div>
+                    </div>
+        
+                    <div class="course-content">
+        
+                      <h3 class="card-title">
+                        <a href="./discover/course.php?id='.$row->idcourse.'&title='.$row->namecourse.'">'.$row->namecourse.'</a>
+                      </h3>
+        
+                      <div class="wrapper border-bottom">
+        
+                        <div class="author">
+                          <img src="'.$row->teacherimage.'" alt="course instructor image" class="author-img">
+        
+                          <a href="./discover/teacher.php" class="author-name">'.$row->teacher.'</a>
+                        </div>
+        
+                      </div>
+        
+                      <div class="wrapper">
+                        <div class="course-price">'.$row->lenght.'</div>
+        
+                        <div class="enrolled">
+        
+                          <p>'.$row->date.'</p>
+                        </div>
+                      </div>
+        
+                    </div>
+        
+                  </div>';
+                }
+
+            }catch(PDOException $e){
+                echo $e->getMessage();
+            }
+
+
+          ?>
 
         </div>
-
-        <button class="btn btn-primary">
-          <p class="btn-text">View All Course</p>
-          <span class="square"></span>
-        </button>
 
       </section>
 
@@ -724,59 +412,49 @@ session_start();
 
           <div class="event-card-group">
 
-            <div class="event-card">
 
-              <div class="content-left">
-                <p class="day">28</p>
-                <p class="month">Feb, 2022</p>
-              </div>
+          <?php
 
-              <div class="content-right">
-                <div class="schedule">
-                  <p class="time">10:30am To 2:30pm</p>
-                  <p class="place">Poland</p>
-                </div>
+            $host = "localhost";
+            $user = "root";
+            $pass = "";
+            $db = "elearning";
 
-                <a href="#" class="event-name">Business creativity workshops</a>
-              </div>
+            try{
+                $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            </div>
+                $sql = "SELECT * FROM events WHERE still = 1 ORDER BY idevent DESC";
+                $statement = $conn->prepare($sql);
+                $statement->execute();
+                $result = $statement->fetchAll(PDO::FETCH_OBJ);
 
-            <div class="event-card">
+                foreach($result as $row){
+                    echo ' <div class="event-card">
 
-              <div class="content-left">
-                <p class="day">15</p>
-                <p class="month">Mar, 2022</p>
-              </div>
+                    <div class="content-left">
+                      <p class="day">'.date("d",strtotime($row->date)).'</p>
+                      <p class="month">'.date("M",strtotime($row->date)).', '.date("Y",strtotime($row->date)).'</p>
+                    </div>
+      
+                    <div class="content-right">
+                      <div class="schedule">
+                        <p class="time">'.$row->startingTime.' To '.$row->endingTime.'</p>
+                        <p class="place">'.$row->place.'</p>
+                      </div>
+      
+                      <a href="#" class="event-name">'.$row->title.'</a>
+                    </div>
+      
+                  </div>';
+                }
 
-              <div class="content-right">
-                <div class="schedule">
-                  <p class="time">10:30am To 2:30pm</p>
-                  <p class="place">Poland</p>
-                </div>
+            }catch(PDOException $e){
+                echo $e->getMessage();
+            }
 
-                <a href="#" class="event-name">Street Performance: Call for Art.</a>
-              </div>
 
-            </div>
-
-            <div class="event-card">
-
-              <div class="content-left">
-                <p class="day">20</p>
-                <p class="month">May, 2022</p>
-              </div>
-
-              <div class="content-right">
-                <div class="schedule">
-                  <p class="time">10:30am To 2:30pm</p>
-                  <p class="place">Poland</p>
-                </div>
-
-                <a href="#" class="event-name">Digital transformation conference</a>
-              </div>
-
-            </div>
+            ?>
 
           </div>
 
@@ -1169,10 +847,10 @@ session_start();
 
           <h2>Start Your Best Online Classes With Us</h2>
 
-          <button class="btn btn-primary">
+          <a class="btn btn-primary" href="./infos/contact.php">
             <p class="btn-text">Contact Us</p>
             <span class="square"></span>
-          </button>
+          </a>
         </div>
 
       </section>

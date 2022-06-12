@@ -616,6 +616,8 @@ class newCourse extends connection{
     }
 }
 
+// ADD A COMMENT CLASS
+
 class comment extends connection{
 
     public function comment($courseId, $userEmail, $publisher, $commentContent, $publishDate){
@@ -641,6 +643,48 @@ class comment extends connection{
             echo $e->getMessage();
         }
     }
+}
+
+// DELETE A COMMENT
+
+if(isset($_GET['action']) && isset($_GET['idcomment']) && $_GET['action'] == 'delete'){
+
+    if(isset($_GET['idcomment'])){
+        $idC = $_GET['idcomment'];
+    }
+
+$host = "localhost";
+$user = "root";
+$pass = "";
+$db = "elearning";
+$conn;
+
+try{
+    $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $sql = "DELETE FROM comments WHERE idcomment = :idcomment";
+    $statement = $conn->prepare($sql);
+
+    $data = [
+        'idcomment' => $idC
+
+    ];
+    $result = $statement->execute($data);
+
+    if($result)
+    {
+        echo "<script>alert('The comment Deleted Successfully!');</script>";
+    }
+    else
+    {
+        echo "<script>alert('The comment did not Deleted!');</script>";
+    }
+
+}catch(PDOException $e){
+    echo $e->getMessage();
+}
+
 }
 
 

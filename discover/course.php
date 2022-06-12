@@ -91,13 +91,13 @@ if(isset($_SESSION['user_email'])){
 
                 <?php
                     if(isset($_SESSION['user_email'])){
-                        echo '<a class="btn btn-primary" name="myProfile" href="user/profile.php">
+                        echo '<a class="btn btn-primary" name="myProfile" href="../user/profile.php">
                                 <p class="btn-text">My account!</p>
                                 <span class="square"></span>
                             </a>';
                     }
                     else{
-                    echo '<a class="btn btn-primary" href="signin.php">
+                    echo '<a class="btn btn-primary" href="../signin.php">
                                 <p class="btn-text">Log in!</p>
                                 <span class="square"></span>
                             </a>';
@@ -225,6 +225,7 @@ if(isset($_SESSION['user_email'])){
                         $username = $row->publisher;
                         $commentContent = $row->content;
                         $publishDate = $row->date;
+                        $publishEmail = $row->email;
                         echo "<div class='comment'>
                         <div class='publicher'>
                         <h2 class='section-subtitle'>".$username."</h2>
@@ -237,6 +238,10 @@ if(isset($_SESSION['user_email'])){
             
                         </div>
                         </div>";
+
+                        if(isset($_SESSION['user_email']) && $_SESSION['user_email'] == $publishEmail){
+                            echo "<a style='color : red;' href='../index.php?idcomment=".$row->idcomment."&action=delete'>Delete my comment!</a> <br>";
+                        }
 
                     }
 

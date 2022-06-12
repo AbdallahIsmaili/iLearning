@@ -789,6 +789,224 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
 
     </section>
 
+    <!-- COMMENTS SECTION -->
+
+    <section class="dashboard comments" id="comments">
+    <div class="dash-content">
+
+    <h1>All About Comments Here!</h1>
+
+    <div class="activity">
+                <div class="title">
+                    <i class="uil uil-clock-three"></i>
+                    <span class="text">All Comments</span>
+                </div>
+
+                <div class="activity-data">
+                    <div class="data names">
+                        <span class="data-title">Comment Id</span>
+
+                        <?php
+
+                            $host = "localhost";
+                            $user = "root";
+                            $pass = "";
+                            $db = "elearning";
+                            $conn;
+
+                            try{
+                                $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                $sql = "SELECT * FROM comments ORDER BY idcomment DESC";
+                                $statment = $conn->prepare($sql);
+                                $statment->execute();
+                                $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+                                if(count($result) > 0){
+                                    foreach($result as $row){
+                                        echo "<span class='data-list'>".$row->idcomment."</span>";
+                                    }
+                                }else{
+                                    echo "<script>alert('We run into a Problem!!');</script>";
+                                }
+                            }catch(PDOException $e){
+                                echo $e->getMessage();
+                            }
+
+                        ?>
+                        
+                    </div>
+                    <div class="data email">
+                        <span class="data-title">Publisher</span>
+                        
+                        <!-- get email from data base -->
+                        <?php
+
+                            $host = "localhost";
+                            $user = "root";
+                            $pass = "";
+                            $db = "elearning";
+                            $conn;
+
+                            try{
+                                $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                $sql = "SELECT * FROM comments ORDER BY idcomment DESC";
+                                $statment = $conn->prepare($sql);
+                                $statment->execute();
+                                $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+                                if(count($result) > 0){
+                                    foreach($result as $row){
+                                        echo "<span class='data-list'>".$row->email."</span>";
+                                    }
+                                }else{
+                                    echo "<script>alert('We run into a Problem!!');</script>";
+                                }
+                            }catch(PDOException $e){
+                                echo $e->getMessage();
+                            }
+
+                        ?>
+                    </div>
+                    <div class="data joined">
+                        <span class="data-title">The Course</span>
+                        <?php
+
+                            $host = "localhost";
+                            $user = "root";
+                            $pass = "";
+                            $db = "elearning";
+                            $conn;
+
+                            try{
+                                $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                $sql = "SELECT * FROM comments ORDER BY idcomment DESC";
+                                $statment = $conn->prepare($sql);
+                                $statment->execute();
+                                $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+                                if(count($result) > 0){
+                                    foreach($result as $row){
+                                        echo "<span class='data-list'>".$row->idcourse."</span>";
+                                    }
+                                }else{
+                                    echo "<script>alert('We run into a Problem!!');</script>";
+                                }
+                            }catch(PDOException $e){
+                                echo $e->getMessage();
+                            }
+
+                        ?>
+                    </div>
+
+                    <div class="data joined">
+                        <span class="data-title">Publish date</span>
+                        <?php
+
+                            $host = "localhost";
+                            $user = "root";
+                            $pass = "";
+                            $db = "elearning";
+                            $conn;
+
+                            try{
+                                $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                $sql = "SELECT * FROM comments ORDER BY idcomment DESC";
+                                $statment = $conn->prepare($sql);
+                                $statment->execute();
+                                $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+                                if(count($result) > 0){
+                                    foreach($result as $row){
+                                        echo "<span class='data-list'>".$row->date."</span>";
+                                    }
+                                }else{
+                                    echo "<script>alert('We run into a Problem!!');</script>";
+                                }
+                            }catch(PDOException $e){
+                                echo $e->getMessage();
+                            }
+
+                        ?>
+                    </div>
+
+                    <div class="data joined">
+                        <span class="data-title">Comment Content</span>
+                        <?php
+
+                            $host = "localhost";
+                            $user = "root";
+                            $pass = "";
+                            $db = "elearning";
+                            $conn;
+
+                            try{
+                                $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                $sql = "SELECT * FROM comments ORDER BY idcomment DESC";
+                                $statment = $conn->prepare($sql);
+                                $statment->execute();
+                                $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+                                if(count($result) > 0){
+                                    foreach($result as $row){
+                                        echo "<span class='data-list'>".substr($row->content, 0, 40)."</span>";
+                                    }
+                                }else{
+                                    echo "<script>alert('We run into a Problem!!');</script>";
+                                }
+                            }catch(PDOException $e){
+                                echo $e->getMessage();
+                            }
+
+                        ?>
+                    </div>
+
+                    <div class="data joined">
+                        <span class="data-title">Actions</span>
+                        <?php
+
+                            $host = "localhost";
+                            $user = "root";
+                            $pass = "";
+                            $db = "elearning";
+                            $conn;
+
+                            try{
+                                $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                $sql = "SELECT * FROM comments ORDER BY idcomment DESC";
+                                $statment = $conn->prepare($sql);
+                                $statment->execute();
+                                $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+                                if(count($result) > 0){
+                                    foreach($result as $row){
+                                        echo "<div class='data-list'><a href='../index.php?idcomment=".$row->idcomment."&action=delete'>Delete</a> </div>";
+                                    }
+                                }else{
+                                    echo "<script>alert('We run into a Problem!!');</script>";
+                                }
+                            }catch(PDOException $e){
+                                echo $e->getMessage();
+                            }
+
+                        ?>
+                    </div>
+                    
+                </div>
+
+            </div>
+            
+        </div>
+        <a class="btn btn-primary" href="../add-course.php" target="_blank">Add Course!
+        </a>
+
+    </section>
+
 
 
     <script src="../assets/js/main.js"></script>

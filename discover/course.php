@@ -245,6 +245,10 @@ if(isset($_SESSION['user_email'])){
 
                     }
 
+                    if(count($result) == 0){
+                        echo "<p class='section-subtitle'>No comments yet!</p>";
+                    }
+
                 }catch(PDOException $e){
                     echo $e->getMessage();
                 }

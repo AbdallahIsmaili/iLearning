@@ -1007,6 +1007,225 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
 
     </section>
 
+    <!-- EVENTS SECTION HERE! -->
+
+    <section class="dashboard events" id="events">
+
+    <div class="dash-content">
+
+<h1>All About Events Here!</h1>
+
+<div class="activity">
+            <div class="title">
+                <i class="uil uil-clock-three"></i>
+                <span class="text">All Events</span>
+            </div>
+
+            <div class="activity-data">
+                <div class="data names">
+                    <span class="data-title">Events Id</span>
+
+                    <?php
+
+                        $host = "localhost";
+                        $user = "root";
+                        $pass = "";
+                        $db = "elearning";
+                        $conn;
+
+                        try{
+                            $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                            $sql = "SELECT * FROM events ORDER BY still DESC";
+                            $statment = $conn->prepare($sql);
+                            $statment->execute();
+                            $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+                            if(count($result) > 0){
+                                foreach($result as $row){
+                                    echo "<span class='data-list'>".$row->idevent."</span>";
+                                }
+                            }else{
+                                echo "<script>alert('We run into a Problem!!');</script>";
+                            }
+                        }catch(PDOException $e){
+                            echo $e->getMessage();
+                        }
+
+                    ?>
+                    
+                </div>
+                <div class="data email">
+                    <span class="data-title">Event Date: </span>
+                    
+                    <!-- get email from data base -->
+                    <?php
+
+                        $host = "localhost";
+                        $user = "root";
+                        $pass = "";
+                        $db = "elearning";
+                        $conn;
+
+                        try{
+                            $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                            $sql = "SELECT * FROM events ORDER BY still DESC";
+                            $statment = $conn->prepare($sql);
+                            $statment->execute();
+                            $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+                            if(count($result) > 0){
+                                foreach($result as $row){
+                                    echo "<span class='data-list'>".$row->date."</span>";
+                                }
+                            }else{
+                                echo "<script>alert('We run into a Problem!!');</script>";
+                            }
+                        }catch(PDOException $e){
+                            echo $e->getMessage();
+                        }
+
+                    ?>
+                </div>
+                <div class="data joined">
+                    <span class="data-title">Event time: </span>
+                    <?php
+
+                        $host = "localhost";
+                        $user = "root";
+                        $pass = "";
+                        $db = "elearning";
+                        $conn;
+
+                        try{
+                            $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                            $sql = "SELECT * FROM events ORDER BY still DESC";
+                            $statment = $conn->prepare($sql);
+                            $statment->execute();
+                            $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+                            if(count($result) > 0){
+                                foreach($result as $row){
+                                    echo "<span class='data-list'>".$row->startingTime." To ".$row->endingTime." </span>";
+                                }
+                            }else{
+                                echo "<script>alert('We run into a Problem!!');</script>";
+                            }
+                        }catch(PDOException $e){
+                            echo $e->getMessage();
+                        }
+
+                    ?>
+                </div>
+
+                <div class="data joined">
+                    <span class="data-title">it'll be in: </span>
+                    <?php
+
+                        $host = "localhost";
+                        $user = "root";
+                        $pass = "";
+                        $db = "elearning";
+                        $conn;
+
+                        try{
+                            $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                            $sql = "SELECT * FROM events ORDER BY still DESC";
+                            $statment = $conn->prepare($sql);
+                            $statment->execute();
+                            $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+                            if(count($result) > 0){
+                                foreach($result as $row){
+                                    echo "<span class='data-list'>".$row->place."</span>";
+                                }
+                            }else{
+                                echo "<script>alert('We run into a Problem!!');</script>";
+                            }
+                        }catch(PDOException $e){
+                            echo $e->getMessage();
+                        }
+
+                    ?>
+                </div>
+
+                <div class="data joined">
+                    <span class="data-title">Event details</span>
+                    <?php
+
+                        $host = "localhost";
+                        $user = "root";
+                        $pass = "";
+                        $db = "elearning";
+                        $conn;
+
+                        try{
+                            $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                            $sql = "SELECT * FROM events ORDER BY still DESC";
+                            $statment = $conn->prepare($sql);
+                            $statment->execute();
+                            $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+                            if(count($result) > 0){
+                                foreach($result as $row){
+                                    echo "<span class='data-list'>".substr($row->details, 0, 40)."</span>";
+                                }
+                            }else{
+                                echo "<script>alert('We run into a Problem!!');</script>";
+                            }
+                        }catch(PDOException $e){
+                            echo $e->getMessage();
+                        }
+
+                    ?>
+                </div>
+
+                <div class="data joined">
+                    <span class="data-title">Actions</span>
+                    <?php
+
+                        $host = "localhost";
+                        $user = "root";
+                        $pass = "";
+                        $db = "elearning";
+                        $conn;
+
+                        try{
+                            $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                            $sql = "SELECT * FROM events ORDER BY still DESC";
+                            $statment = $conn->prepare($sql);
+                            $statment->execute();
+                            $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+                            if(count($result) > 0){
+                                foreach($result as $row){
+                                    echo "<div class='data-list'><a href='../edit-event.php?id=".$row->idevent."&title=".$row->title."&desc=".$row->details."&in=".$row->place."&at=".$row->startingTime."&to=".$row->endingTime."&date=".$row->date."&action=editevent' target='_blank'>Edit</a> | <a href='../index.php?idevent=".$row->idevent."&action=delete'>Delete</a> | <a href='../index.php?idevent=".$row->idevent."&action=launch' name='launch-event'>Launch</a></div>";
+                                }
+                            }else{
+                                echo "<script>alert('We run into a Problem!!');</script>";
+                            }
+                        }catch(PDOException $e){
+                            echo $e->getMessage();
+                        }
+
+                    ?>
+                </div>
+                
+            </div>
+
+        </div>
+        
+    </div>
+    <a class="btn btn-primary" href="../add-event.php" target="_blank">Add an event!
+    </a>
+
+    </section>
+
 
 
     <script src="../assets/js/main.js"></script>

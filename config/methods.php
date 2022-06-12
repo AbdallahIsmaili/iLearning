@@ -687,6 +687,30 @@ try{
 
 }
 
+// ADD NEW EVENT CLASS HERE 
+
+
+class newEvent extends connection{
+
+    public function newEvent($eventTitle, $eventDate, $eventStarting, $eventEnding, $eventWhere, $eventDetails){
+
+        try{
+            
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);  
+            $sql = "INSERT INTO events (title, date, startingTime, endingTime, place, details, still) VALUES ('$eventTitle', '$eventDate', '$eventStarting', '$eventEnding', '$eventWhere', '$eventDetails', 0)";
+
+            $statment = $this->conn->prepare($sql);
+            $statment->execute();
+            $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+            return 1;
+
+        }catch(PDOException $e){
+            echo $e->getMessage();
+        }
+    }
+}
+
 
 // class profile extends connection{
 

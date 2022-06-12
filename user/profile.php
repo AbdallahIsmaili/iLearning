@@ -17,7 +17,7 @@ if(isset($_SESSION['user_email'])){
   <!--
     - custom css link
   -->
-  <link rel="stylesheet" href="../assets/css/style.css?v1.3">
+  <link rel="stylesheet" href="../assets/css/style.css?v1.5">
   <link rel="stylesheet" href="../assets/css/media_queries.css">
   <link rel="stylesheet" href="../assets/css/animation.css">
 
@@ -208,6 +208,73 @@ if(isset($_SESSION['user_email'])){
         </div>
         
       </div>
+
+    <br>
+
+    <h2 class="section-title">My saved courses</h2>
+
+    <?php
+
+      $host = "localhost";
+      $user = "root"; 
+      $pass = "";
+      $db = "elearning";
+      $conn;
+      $session_email = $_SESSION['user_email'];
+
+      try{
+        $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "SELECT * FROM later WHERE email = '$session_email'";
+        $statment = $conn->prepare($sql);
+        $statment->execute();
+        $result1 = $statment->fetchAll(PDO::FETCH_OBJ);
+
+
+        if(count($result1) > 0){
+          echo "<table>";
+          echo "<tr>";
+          echo "<th>Course Name</th>";
+          echo "<th>Course Description</th>";
+          echo "<th>Course Duration</th>";
+          echo "<th>Course Category</th>";
+          echo "<th>Course Author</th>";
+          echo "<th>Publish Date</th>";
+  
+          echo "</tr>";
+          foreach($result1 as $row){
+            $course_id = $row->idcourse;
+            
+            $sql = "SELECT * FROM course WHERE idcourse = '$course_id'";
+            $statment = $conn->prepare($sql);
+            $statment->execute();
+            $result2 = $statment->fetchAll(PDO::FETCH_OBJ);
+          
+        if(count($result2) > 0){
+           
+
+            foreach($result2 as $row2){
+                echo "<tr>";
+                echo "<td>".$row2->namecourse."</td>";
+                echo "<td>".$row2->description."</td>";
+                echo "<td>".$row2->lenght."</td>";
+                echo "<td>".$row2->coursefor."</td>";
+                echo "<td>".$row2->teacher."</td>";
+                echo "<td>".$row2->date."</td>";
+                echo "</tr>";
+            }
+          }
+        }
+        echo "</table>";
+        }else{
+            echo "<p class='no-course'>You have no saved courses yet!</p>";
+        }
+
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }
+
+    ?>
     
 
     </div>

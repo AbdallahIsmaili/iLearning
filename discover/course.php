@@ -37,6 +37,8 @@ if(isset($_SESSION['user_email'])){
 
     }
 
+    
+
     ?>
 
 <!DOCTYPE html>
@@ -132,6 +134,7 @@ if(isset($_SESSION['user_email'])){
                 $result = $statement->fetchAll(PDO::FETCH_OBJ);
 
                 foreach($result as $row){
+                    $categoryId = $row->idcategory;
                     $CourseFor = $row->coursefor;
                     $courseDate = $row->date;
                     $CourseDesc = $row->description;
@@ -154,6 +157,39 @@ if(isset($_SESSION['user_email'])){
                 <h2 class="main-heading"><?php echo $courseTitle; ?></h2> <br>
                 <p class="section-subtitle"><?php echo $CourseFor ?></p>
                 <h4><?php echo $CourseLength ?>, <?php echo $language ?></h4>
+            </div>
+            <div class="course-header">
+                <form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
+
+                    <button type="submit" class="later-button" name="add-later">Watch later!</button>
+
+                </form>
+
+                <?php
+
+                    if(isset($_POST['add-later'])){
+                        $user = $_SESSION['user_email'];
+                        $courseId = $_GET['id'];
+
+                        $sql = "SELECT * FROM later where email = '$user' and idcourse = '$courseId' and idcategory = '$categoryId'";
+                        $statement = $conn->prepare($sql);
+                        $statement->execute();
+                        $result = $statement->fetchAll(PDO::FETCH_OBJ);
+
+                        if(count($result) == 0){
+                            $sql = "INSERT INTO later (email, idcourse, idcategory) VALUES ('$user', '$courseId', '$categoryId')";
+                            $statement = $conn->prepare($sql);
+                            $statement->execute();
+                            echo '<script>alert("Course added to later!");</script>';
+                        }
+                        else{
+                            echo '<script>alert("Course already added to later!");</script>';
+                        }
+                        
+                    }
+
+                ?>
+
             </div>
             <br>
 

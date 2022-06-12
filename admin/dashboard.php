@@ -1708,7 +1708,13 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
                         if(count($result) > 0){
                             foreach($result as $row){
 
-                                echo "<div class='data-list'><a href='../index.php?email=".$row->email."&action=ban'>Ban</a> | <a href='../index.php?email=".$row->email."&type=".$row->type."&action=rise' name='launch-event'>Rise</a></div>";
+                                if($row->type == 'user'){
+                                    $launching = 'Rise up';
+                                }else if($row->type == 'admin'){
+                                    $launching = 'Revoke';
+                                }
+
+                                echo "<div class='data-list'><a href='../index.php?email=".$row->email."&action=ban'>Ban</a> | <a href='../index.php?email=".$row->email."&type=".$row->type."&action=rise' name='launch-event'>".$launching."</a></div>";
                             }
                         }else{
                             echo "<script>alert('We run into a Problem!!');</script>";

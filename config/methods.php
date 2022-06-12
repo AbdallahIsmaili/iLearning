@@ -1019,6 +1019,106 @@ try{
 
 }
 
+// BAN A USER
+
+if(isset($_GET['action']) && isset($_GET['email']) && $_GET['action'] == 'ban'){
+
+    if(isset($_GET['email'])){
+        $idE = $_GET['email'];
+    }
+
+$host = "localhost";
+$user = "root";
+$pass = "";
+$db = "elearning";
+$conn;
+
+try{
+    $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $sql = "DELETE FROM users WHERE email = :email";
+    $statement = $conn->prepare($sql);
+
+    $data = [
+        'email' => $idE
+
+    ];
+    $result = $statement->execute($data);
+
+    if($result)
+    {
+        echo "<script>alert('The user banned Successfully!');</script>";
+        echo "<script>window.open('./admin/dashboard.php','_self')</script>";
+    }
+    else
+    {
+        echo "<script>alert('The user did not banned!');</script>";
+    }
+
+}catch(PDOException $e){
+    echo $e->getMessage();
+}
+
+}
+
+// RISE OR REVOKE A USER
+
+if(isset($_GET['action']) && isset($_GET['email']) && isset($_GET['type']) && $_GET['action'] == 'rise'){
+
+    if(isset($_GET['email'])){
+        $idM = $_GET['email'];
+    }
+
+$host = "localhost";
+$user = "root";
+$pass = "";
+$db = "elearning";
+$conn;
+
+try{
+    $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    if($_GET['type'] == 'user'){
+        $sql = "UPDATE users SET type = 'admin' WHERE email = :email";
+        $respond = 1;
+    }else {
+        $sql = "UPDATE users SET type = 'user' WHERE email = :email";
+        $respond = 0;
+    }
+
+    $statement = $conn->prepare($sql);
+
+    $data = [
+        'email' => $idM
+
+    ];
+    $result = $statement->execute($data);
+
+    if($result)
+    {
+        if($respond == 0){
+            echo "<script>alert('The administration cancelled Successfully!');</script>";
+            echo "<script>window.open('./admin/dashboard.php','_self')</script>";
+
+        }else{
+            echo "<script>alert('The administration done Successfully!');</script>";
+            echo "<script>window.open('./admin/dashboard.php','_self')</script>";
+        }
+        
+    }
+    else
+    {
+        echo "<script>alert('The administration did not launched via an error!');</script>";
+    }
+
+}catch(PDOException $e){
+    echo $e->getMessage();
+}
+
+}
+
 // class profile extends connection{
 
 //     public $username;

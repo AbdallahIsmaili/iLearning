@@ -994,6 +994,7 @@ html {
 .testimonials {
   padding: var(--py) var(--px);
   background: var(--cultured);
+  margin-bottom: 12rem;
 }
 
 .testimonials .section-subtitle { margin-bottom: 15px; }

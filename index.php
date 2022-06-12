@@ -99,10 +99,6 @@ session_start();
 
     </header>
 
-
-
-
-
     <main>
 
       <!--
@@ -126,7 +122,7 @@ session_start();
 
         <div class="home-left">
 
-          <p class="section-subtitle">Welcome To Online Coaching</p>
+          <p class="section-subtitle">Welcome <?php echo $_SESSION['user_name']; ?> To Online Coaching</p>
 
           <h1 class="main-heading">
             Get Class From Top
@@ -168,10 +164,6 @@ session_start();
         </div>
 
       </section>
-
-
-
-
 
       <!--
         - #COURSE CATEGORY SECTION

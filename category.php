@@ -205,6 +205,19 @@ session_start();
 
          ?>
 
+        <div class="search-box">
+          <form action="category.php?idcategory=<?php echo $idCategory ?>" method="post">
+
+            <input type="text" name='search-about' placeholder="Search for a course">
+            <br>
+            <button type="submit" name='search-course' class="btn btn-primary">
+              <p class="btn-text">Search</p>
+              <span class="square"></span>
+            </button>
+
+          </form>
+        </div>
+
 
 
         <div class="course-grid">
@@ -223,7 +236,16 @@ session_start();
 
                 $idCategory = $_GET['idcategory'];
 
-                $sql = "SELECT * FROM course where idcategory = '$idCategory' ORDER BY idcourse DESC";
+                if(!isset($_POST['search-course'])){
+                    $sql = "SELECT * FROM course where idcategory = '$idCategory'";
+                }
+                else{
+                  if(isset($_POST['search-about'])){
+                      $search = $_POST['search-about'];
+                      $sql = "SELECT * FROM course where idcategory = '$idCategory' and namecourse like '%$search%'";
+                  }
+                }
+
                 $statement = $conn->prepare($sql);
                 $statement->execute();
                 $result = $statement->fetchAll(PDO::FETCH_OBJ);

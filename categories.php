@@ -175,6 +175,18 @@ session_start();
 
         <h2 class="section-title">Explore Out Categories</h2>
 
+        <div class="search-box">
+          <form action="categories.php" method="post">
+
+            <input type="text" name='search-about' placeholder="Search for a course">
+            <button type="submit" name='search-category' class="btn btn-primary">
+              <p class="btn-text">Search</p>
+              <span class="square"></span>
+            </button>
+
+          </form>
+        </div>
+
         <ul class="course-item-group">
 
           <!-- Get categories from database -->
@@ -190,12 +202,41 @@ session_start();
                 $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                $sql = "SELECT * FROM category ORDER BY idcategory";
-                $statement = $conn->prepare($sql);
-                $statement->execute();
-                $result = $statement->fetchAll(PDO::FETCH_OBJ);
+                if(!isset($_POST['search-category'])){
 
-                foreach($result as $row){
+                  $sql = "SELECT * FROM category ORDER BY idcategory";
+                  $statement = $conn->prepare($sql);
+                  $statement->execute();
+                  $result = $statement->fetchAll(PDO::FETCH_OBJ);
+
+                  foreach($result as $row){
+                      echo '<li class="course-category-item">
+                              <div class="wrapper">
+                              <img src="'.$row->image.'" alt="category icon" class="category-icon default">
+                  
+                              <img src="'.$row->image.'" alt="category icon white"
+                                  class="category-icon hover">
+                              </div>
+                  
+                              <div class="course-category-content">
+                              <h3 class="category-title">
+                              <a href="category.php?idcategory='.$row->idcategory.'">'.$row->namecategory.'</a>
+                              </h3>
+                  
+                              <p class="category-subtitle">'.$row->categorydesc.'</p>
+                              </div>
+                  
+                          </li>';
+                  }
+                }else if(isset($_POST['search-category'])){
+                  $search = $_POST['search-about'];
+
+                  $sql = "SELECT * FROM category WHERE namecategory LIKE '%$search%'";
+                  $statement = $conn->prepare($sql);
+                  $statement->execute();
+                  $result = $statement->fetchAll(PDO::FETCH_OBJ);
+
+                  foreach($result as $row){
                     echo '<li class="course-category-item">
                             <div class="wrapper">
                             <img src="'.$row->image.'" alt="category icon" class="category-icon default">
@@ -214,6 +255,7 @@ session_start();
                 
                         </li>';
                 }
+              }
 
             }catch(PDOException $e){
                 echo $e->getMessage();

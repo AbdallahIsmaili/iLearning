@@ -392,6 +392,54 @@ function getTotalAdmin(){
     }
 }
 
+// GET TOTAL MESSAGES FUNCTION
+
+function getTotalMessages(){
+    $host = "localhost";
+    $user = "root";
+    $pass = "";
+    $db = "elearning";
+
+    try{
+        $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $sql = "SELECT * FROM messages";
+        $statement = $conn->prepare($sql);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_OBJ);
+
+        return count($result);
+
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }
+}
+
+// GET TOTAL EVETS FUNCTION
+
+function getTotalEvents(){
+    $host = "localhost";
+    $user = "root";
+    $pass = "";
+    $db = "elearning";
+
+    try{
+        $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $sql = "SELECT * FROM events";
+        $statement = $conn->prepare($sql);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_OBJ);
+
+        return count($result);
+
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }
+}
+
 // UPDATE CATEGORY INFORMATION
 
 
@@ -852,12 +900,12 @@ class updateEvent extends connection{
 
 class newMessage extends connection{
 
-    public function newMessage($senderName, $senderEmail, $senderMessage, $senderSESSIONemail, $senderSESSIONimage){
+    public function newMessage($senderName, $senderEmail, $senderMessage, $senderSESSIONemail, $senderSESSIONimage, $messageDate){
 
         try{
             
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);  
-            $sql = "INSERT INTO messages (email, name, content, trueEmail, image) VALUES ('$senderEmail', '$senderName', '$senderMessage', '$senderSESSIONemail', '$senderSESSIONimage')";
+            $sql = "INSERT INTO messages (email, name, content, trueEmail, image, readit, mainit, date) VALUES ('$senderEmail', '$senderName', '$senderMessage', '$senderSESSIONemail', '$senderSESSIONimage', 0, 0, '$messageDate')";
 
             $statment = $this->conn->prepare($sql);
             $statment->execute();
@@ -871,6 +919,105 @@ class newMessage extends connection{
     }
 }
 
+// LAUNCH A MESSAGE TO HOME CLASS
+
+if(isset($_GET['action']) && isset($_GET['idmessage']) && isset($_GET['pub']) && $_GET['action'] == 'launch-event'){
+
+    if(isset($_GET['idmessage'])){
+        $idM = $_GET['idmessage'];
+    }
+
+$host = "localhost";
+$user = "root";
+$pass = "";
+$db = "elearning";
+$conn;
+
+try{
+    $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    if($_GET['pub'] == 0){
+        $sql = "UPDATE messages SET mainit = 1 WHERE idmessage = :idmessage";
+        $respond = 1;
+    }else {
+        $sql = "UPDATE messages SET mainit = 0 WHERE idmessage = :idmessage";
+        $respond = 0;
+    }
+
+    $statement = $conn->prepare($sql);
+
+    $data = [
+        'idmessage' => $idM
+
+    ];
+    $result = $statement->execute($data);
+
+    if($result)
+    {
+        if($respond == 0){
+            echo "<script>alert('The message cancelled Successfully!');</script>";
+            echo "<script>window.open('./admin/dashboard.php','_self')</script>";
+
+        }else{
+            echo "<script>alert('The message launched Successfully!');</script>";
+            echo "<script>window.open('./admin/dashboard.php','_self')</script>";
+        }
+        
+    }
+    else
+    {
+        echo "<script>alert('The event did not launched via an error!');</script>";
+    }
+
+}catch(PDOException $e){
+    echo $e->getMessage();
+}
+
+}
+
+// DELETE A MESSAGE
+
+if(isset($_GET['action']) && isset($_GET['idmessage']) && $_GET['action'] == 'delete'){
+
+    if(isset($_GET['idmessage'])){
+        $idE = $_GET['idmessage'];
+    }
+
+$host = "localhost";
+$user = "root";
+$pass = "";
+$db = "elearning";
+$conn;
+
+try{
+    $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $sql = "DELETE FROM messages WHERE idmessage = :idmessage";
+    $statement = $conn->prepare($sql);
+
+    $data = [
+        'idmessage' => $idE
+
+    ];
+    $result = $statement->execute($data);
+
+    if($result)
+    {
+        echo "<script>alert('The message Deleted Successfully!');</script>";
+        echo "<script>window.open('./admin/dashboard.php','_self')</script>";
+    }
+    else
+    {
+        echo "<script>alert('The message did not Deleted!');</script>";
+    }
+
+}catch(PDOException $e){
+    echo $e->getMessage();
+}
+
+}
 
 // class profile extends connection{
 

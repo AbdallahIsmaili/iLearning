@@ -201,6 +201,26 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
                             ?>
                         </div>
                     </div>
+                    <div class="box box5">
+                        <i class="uil uil-message"></i>
+                        <span class="text">Messages</span>
+                        <div class="number">
+                            <?php
+                                $totalMessages = getTotalMessages();
+                                echo $totalMessages;
+                            ?>
+                        </div>
+                    </div>
+                    <div class="box box4">
+                        <i class="uil uil-fire"></i>
+                        <span class="text">Events</span>
+                        <div class="number">
+                            <?php
+                                $totalEvents = getTotalEvents();
+                                echo $totalEvents;
+                            ?>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -342,6 +362,7 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
 
                         ?>
                     </div>
+                    
                 </div>
             </div>
         </div>
@@ -1263,6 +1284,260 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
     </a>
 
     </section>
+
+        <!-- Messages SECTION HERE! -->
+
+        <section class="dashboard events" id="events">
+
+<div class="dash-content">
+
+<h1>All About Messages Here!</h1>
+
+<div class="activity">
+        <div class="title">
+            <i class="uil uil-clock-three"></i>
+            <span class="text">All Messages</span>
+        </div>
+
+        <div class="activity-data">
+            <div class="data names">
+                <span class="data-title">Message Id</span>
+
+                <?php
+
+                    $host = "localhost";
+                    $user = "root";
+                    $pass = "";
+                    $db = "elearning";
+                    $conn;
+
+                    try{
+                        $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                        $sql = "SELECT * FROM messages ORDER BY idmessage DESC";
+                        $statment = $conn->prepare($sql);
+                        $statment->execute();
+                        $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+                        if(count($result) > 0){
+                            foreach($result as $row){
+                                echo "<span class='data-list'>".$row->idmessage."</span>";
+                            }
+                        }else{
+                            echo "<script>alert('We run into a Problem!!');</script>";
+                        }
+                    }catch(PDOException $e){
+                        echo $e->getMessage();
+                    }
+
+                ?>
+                
+            </div>
+            <div class="data email">
+                <span class="data-title">Sender email: </span>
+                
+                <?php
+
+                    $host = "localhost";
+                    $user = "root";
+                    $pass = "";
+                    $db = "elearning";
+                    $conn;
+
+                    try{
+                        $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                        $sql = "SELECT * FROM messages ORDER BY idmessage DESC";
+                        $statment = $conn->prepare($sql);
+                        $statment->execute();
+                        $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+                        if(count($result) > 0){
+                            foreach($result as $row){
+                                echo "<span class='data-list'>".$row->trueEmail."</span>";
+                            }
+                        }else{
+                            echo "<script>alert('We run into a Problem!!');</script>";
+                        }
+                    }catch(PDOException $e){
+                        echo $e->getMessage();
+                    }
+
+                ?>
+            </div>
+            <div class="data joined">
+                <span class="data-title">Email entred: </span>
+                <?php
+
+                    $host = "localhost";
+                    $user = "root";
+                    $pass = "";
+                    $db = "elearning";
+                    $conn;
+
+                    try{
+                        $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                        $sql = "SELECT * FROM messages ORDER BY idmessage DESC";
+                        $statment = $conn->prepare($sql);
+                        $statment->execute();
+                        $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+                        if(count($result) > 0){
+                            foreach($result as $row){
+                                echo "<span class='data-list'>".$row->email." </span>";
+                            }
+                        }else{
+                            echo "<script>alert('We run into a Problem!!');</script>";
+                        }
+                    }catch(PDOException $e){
+                        echo $e->getMessage();
+                    }
+
+                ?>
+            </div>
+
+            <div class="data joined">
+                <span class="data-title">username: </span>
+                <?php
+
+                    $host = "localhost";
+                    $user = "root";
+                    $pass = "";
+                    $db = "elearning";
+                    $conn;
+
+                    try{
+                        $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                        $sql = "SELECT * FROM messages ORDER BY idmessage DESC";
+                        $statment = $conn->prepare($sql);
+                        $statment->execute();
+                        $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+                        if(count($result) > 0){
+                            foreach($result as $row){
+                                echo "<span class='data-list'>".$row->name."</span>";
+                            }
+                        }else{
+                            echo "<script>alert('We run into a Problem!!');</script>";
+                        }
+                    }catch(PDOException $e){
+                        echo $e->getMessage();
+                    }
+
+                ?>
+            </div>
+
+            <div class="data joined">
+                <span class="data-title">Message content: </span>
+                <?php
+
+                    $host = "localhost";
+                    $user = "root";
+                    $pass = "";
+                    $db = "elearning";
+                    $conn;
+
+                    try{
+                        $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                        $sql = "SELECT * FROM messages ORDER BY idmessage DESC";
+                        $statment = $conn->prepare($sql);
+                        $statment->execute();
+                        $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+                        if(count($result) > 0){
+                            foreach($result as $row){
+                                echo "<span class='data-list'>".substr($row->content, 0, 40)."</span>";
+                            }
+                        }else{
+                            echo "<script>alert('We run into a Problem!!');</script>";
+                        }
+                    }catch(PDOException $e){
+                        echo $e->getMessage();
+                    }
+
+                ?>
+            </div>
+
+            <div class="data joined">
+                <span class="data-title">Is read: </span>
+                <?php
+
+                    $host = "localhost";
+                    $user = "root";
+                    $pass = "";
+                    $db = "elearning";
+                    $conn;
+
+                    try{
+                        $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                        $sql = "SELECT * FROM messages ORDER BY idmessage DESC";
+                        $statment = $conn->prepare($sql);
+                        $statment->execute();
+                        $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+                        if(count($result) > 0){
+                            foreach($result as $row){
+                                echo "<span class='data-list'>".$row->readit."</span>";
+                            }
+                        }else{
+                            echo "<script>alert('We run into a Problem!!');</script>";
+                        }
+                    }catch(PDOException $e){
+                        echo $e->getMessage();
+                    }
+
+                ?>
+            </div>
+
+            <div class="data joined">
+                <span class="data-title">Actions</span>
+                <?php
+
+                    $host = "localhost";
+                    $user = "root";
+                    $pass = "";
+                    $db = "elearning";
+                    $conn;
+
+                    try{
+                        $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                        $sql = "SELECT * FROM messages ORDER BY idmessage DESC";
+                        $statment = $conn->prepare($sql);
+                        $statment->execute();
+                        $result = $statment->fetchAll(PDO::FETCH_OBJ);
+
+                        if(count($result) > 0){
+                            foreach($result as $row){
+                                if($row->mainit == 0){
+                                    $launching = 'Pub';
+                                }else if($row->mainit == 1){
+                                    $launching = 'Rem';
+                                }
+
+                                echo "<div class='data-list'><a href='../message.php?id=".$row->idmessage."&content=".$row->content."&email=".$row->email."&true=".$row->trueEmail."&image=".$row->image."&name=".$row->name."&read=".$row->readit."&pub=".$row->mainit."&date=".$row->date."&action=see' target='_blank'>See</a> | <a href='../index.php?idmessage=".$row->idmessage."&action=delete'>Delete</a> | <a href='../index.php?idmessage=".$row->idmessage."&pub=".$row->mainit."&action=launch-event' name='launch-event'>".$launching."</a></div>";
+                            }
+                        }else{
+                            echo "<script>alert('We run into a Problem!!');</script>";
+                        }
+                    }catch(PDOException $e){
+                        echo $e->getMessage();
+                    }
+
+                ?>
+            </div>
+            
+        </div>
+
+    </div>
+    
+</div>
+
+</section>
 
 
 

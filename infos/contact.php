@@ -17,8 +17,9 @@ if(isset($_POST['message-btn'])){
     $senderMessage = $_POST['sender-message'];
     $senderSESSIONemail = $_SESSION['user_email'];
     $senderSESSIONimage = $_SESSION['user_image'];
+    $messageDate =  date('Y-m-d');
 
-    $result = $newMessage->newMessage($senderName, $senderEmail, $senderMessage, $senderSESSIONemail, $senderSESSIONimage);
+    $result = $newMessage->newMessage($senderName, $senderEmail, $senderMessage, $senderSESSIONemail, $senderSESSIONimage, $messageDate);
 
     if($result == 1){
         // header("Location: ./signup.php");

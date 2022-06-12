@@ -660,9 +660,6 @@ session_start();
       </section>
 
 
-
-
-
       <!--
         - #TESTIMONIALS
       -->
@@ -676,10 +673,7 @@ session_start();
           <h2 class="section-title">What Our Client Says About Us</h2>
 
           <p class="section-text">
-            Proin et lacus eu odio tempor porttitor id vel augue. Vivamus volutpat vehicula sem, et imperdiet enim
-            tempor id.
-            Phasellus lobortis efficitur nisl eget vehicula. Donec viverra blandit nunc, nec tempor ligula ullamcorper
-            venenatis.
+            iLearning so happy to see your opinions, thoughts and questions, <br> so make sure to contact us whenever you want, we will be so happy to see your words about owr website.
           </p>
 
         </div>
@@ -689,27 +683,57 @@ session_start();
           <div class="testimonials-card">
             <img src="./assets/images/quote.png" alt="quote icon" class="quote-img">
 
-            <p class="testimonials-text">
-              "Proin feugiat tortor non neque eleifend, at fermentum est elementum. Ut mollis leo odio vulputate rutrum.
-              Nunc sagittis
-              sit amet ligula ut eleifend. Mauris consequat mauris sit amet turpis commodo fermentum. Quisque consequat
-              tortor ut nisl
-              finibus".
-            </p>
+            <?php
 
-            <div class="testimonials-client">
+            $host = "localhost";
+            $user = "root";
+            $pass = "";
+            $db = "elearning";
 
-              <div class="client-img-box">
-                <img src="./assets/images/client.jpg" alt="client christine rose">
-              </div>
+            try{
+                $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-              <div class="client-detail">
-                <h4 class="client-name">Christine Rose</h4>
+                $sql = "SELECT * FROM messages WHERE mainit = 1 LIMIT 1";
+                $statement = $conn->prepare($sql);
+                $statement->execute();
+                $result = $statement->fetchAll(PDO::FETCH_OBJ);
 
-                <p class="client-title">Customer</p>
-              </div>
+                foreach($result as $row){
 
-            </div>
+                    echo '<p class="testimonials-text">'.$row->content.'</p>
+        
+                    <div class="testimonials-client">';
+
+                    $image = $row->image;
+
+                    $sql = "SELECT * FROM images WHERE idimage = '$image'";
+                    $statement = $conn->prepare($sql);
+                    $statement->execute();
+                    $result2 = $statement->fetchAll(PDO::FETCH_OBJ);
+
+                    foreach($result2 as $row2){
+                        echo '<div class="client-img-box">
+                                <img width="140px" height="auto" src="'.$row2->path.'" alt="client">
+                              </div>';
+                    }
+        
+                      echo '<div class="client-detail">
+                        <h4 class="client-name">'.strtoupper($row->name).'</h4>
+        
+                        <p class="client-title">Customer</p>
+                      </div>
+        
+                    </div>';
+                }
+
+            }catch(PDOException $e){
+                echo $e->getMessage();
+            }
+
+
+            ?>
+
           </div>
 
         </div>

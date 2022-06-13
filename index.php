@@ -122,7 +122,18 @@ session_start();
 
         <div class="home-left">
 
-          <p class="section-subtitle">Welcome <?php echo $_SESSION['user_name']; ?> To Online Coaching</p>
+
+        <?php
+
+          if(isset($_SESSION['user_name'])){
+            $username = $_SESSION['user_name'];
+          }else{
+            $username = '';
+          }
+
+        ?>
+
+          <p class="section-subtitle">Welcome <?php echo $username; ?> To Online Coaching</p>
 
           <h1 class="main-heading">
             Get Class From Top

@@ -27,7 +27,6 @@ if(isset($_POST['add-course'])){
     $result = $newCourse->newCourse($idCategory, $CourseName, $CourseFor, $courseDate, $CourseDesc, $teacher, $teacherImg, $language, $CourseImg, $CoursePath, $CourseLength);
 
     if($result == 1){
-        // header("Location: ./login.php");
         echo "<script>alert('The Course has been added successfully!')</script>";
         echo "<script>window.open('./admin/dashboard.php','_self')</script>";
     }

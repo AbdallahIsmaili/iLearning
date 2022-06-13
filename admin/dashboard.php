@@ -9,10 +9,21 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
     $adminName = $_SESSION['user_name'];
     $adminImage = $_SESSION['user_image'];
 
+    
+    $limit = 9;
+    
+    if (isset($_GET["page"])) {
+        $page= $_GET["page"];
+    }
+    else{
+        $page = 1;
+    }
+    
+    $start_from=($page-1)*$limit;
+    
     ?>
 
 <!DOCTYPE html>
-<!--=== Coding by CodingLab | www.codinglabweb.com === -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -20,7 +31,7 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!----======== CSS ======== -->
-    <link rel="stylesheet" href="../assets/css/dashboard.css?v1.5">
+    <link rel="stylesheet" href="../assets/css/dashboard.css?v1.6">
      
     <!----===== Iconscout CSS ===== -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -39,6 +50,10 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
 
         <div class="menu-items">
             <ul class="nav-links">
+                <li><a href="../index.php">
+                    <i class="uil uil-home"></i>
+                    <span class="link-name">Home</span>
+                </a></li>
                 <li><a href="#dashboard">
                     <i class="uil uil-estate"></i>
                     <span class="link-name">Dashboard</span>
@@ -47,29 +62,34 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
                     <i class="uil uil-files-landscapes"></i>
                     <span class="link-name">Categories</span>
                 </a></li>
-                <li><a href="#">
-                    <i class="uil uil-files-landscapes"></i>
+                <li><a href="#users">
+                    <i class="uil uil-user"></i>
                     <span class="link-name">users</span>
-                </a></li>
-                <li><a href="#">
-                    <i class="uil uil-chart"></i>
-                    <span class="link-name">Analytics</span>
                 </a></li>
                 <li><a href="#courses">
                     <i class="uil uil-thumbs-up"></i>
                     <span class="link-name">Courses</span>
                 </a></li>
-                <li><a href="#">
-                    <i class="uil uil-share"></i>
-                    <span class="link-name">Posts & blog</span>
+                <li><a href="#events">
+                    <i class="uil uil-fire"></i>
+                    <span class="link-name">Events</span>
                 </a></li>
-                <li><a href="#">
+                <li><a href="#messages">
+                    <i class="uil uil-message"></i>
+                    <span class="link-name">Messages</span>
+                </a></li>
+                <li><a href="#comments">
                     <i class="uil uil-comments"></i>
                     <span class="link-name">Comments</span>
                 </a></li>
             </ul>
             
             <ul class="logout-mode">
+                <li><a href='../user/profile.php'>
+                    <i class="uil uil-picture"></i>
+                    <span class="link-name">My Profile</span>
+                </a></li>
+
                 <li><a href='../index.php?useremail=<?php echo $_SESSION['user_email']; ?>&action=logout'>
                     <i class="uil uil-signout"></i>
                     <span class="link-name">Logout</span>
@@ -395,7 +415,7 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
                             try{
                                 $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
                                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                                $sql = "SELECT * FROM category";
+                                $sql = "SELECT * FROM category LIMIT $start_from, $limit";
                                 $statment = $conn->prepare($sql);
                                 $statment->execute();
                                 $result = $statment->fetchAll(PDO::FETCH_OBJ);
@@ -429,7 +449,7 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
                             try{
                                 $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
                                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                                $sql = "SELECT * FROM category";
+                                $sql = "SELECT * FROM category LIMIT $start_from, $limit";
                                 $statment = $conn->prepare($sql);
                                 $statment->execute();
                                 $result = $statment->fetchAll(PDO::FETCH_OBJ);
@@ -461,7 +481,7 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
                             try{
                                 $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
                                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                                $sql = "SELECT * FROM category";
+                                $sql = "SELECT * FROM category LIMIT $start_from, $limit";
                                 $statment = $conn->prepare($sql);
                                 $statment->execute();
                                 $result = $statment->fetchAll(PDO::FETCH_OBJ);
@@ -493,7 +513,7 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
                             try{
                                 $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
                                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                                $sql = "SELECT * FROM category";
+                                $sql = "SELECT * FROM category LIMIT $start_from, $limit";
                                 $statment = $conn->prepare($sql);
                                 $statment->execute();
                                 $result = $statment->fetchAll(PDO::FETCH_OBJ);
@@ -517,6 +537,45 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
             </div>
             
         </div>
+
+        <div class="pagination-holder">
+            <ul class="pagination">
+
+                <?php 
+
+                    $host = "localhost";
+                    $user = "root";
+                    $pass = "";
+                    $db = "elearning";
+                    $conn;
+
+                    try{
+                        $conn = new PDO("mysql:host=".$host.";dbname=".$db,$user,$pass);
+                        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                        $sql = "SELECT * FROM category";
+                        $statment = $conn->prepare($sql);
+                        $statment->execute();
+                        $result = $statment->fetchAll(PDO::FETCH_OBJ);
+                        $total_records = count($result);
+                        $total_pages = ceil($total_records/$limit);
+
+                        for ($i=1; $i <= $total_pages ; $i++) { 
+                        # code...
+                        echo "<li class='pagination-item'>";
+                        echo "<a class='pagination-link' href='dashboard.php?page=".$i."#categories'>".$i."</a>";
+                        echo "</li>";
+                        }
+
+                    }catch(PDOException $e){
+                        echo $e->getMessage();
+                    }
+
+                ?>
+                
+            </ul>
+        </div>
+
         <a class="btn btn-primary" href="../add-category.php" target="_blank">Add Category!
         </a>
 
@@ -1287,7 +1346,7 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
 
         <!-- Messages SECTION HERE! -->
 
-        <section class="dashboard events" id="events">
+        <section class="dashboard messages" id="messages">
 
 <div class="dash-content">
 
@@ -1542,7 +1601,7 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
 <!-- EVERYTHING ABOUT USERS -->
 
 
-<section class="dashboard events" id="events">
+<section class="dashboard users" id="users">
 
 <div class="dash-content">
 

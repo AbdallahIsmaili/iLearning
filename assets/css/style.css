@@ -1468,3 +1468,37 @@ table td{
 .author-img{
   width: 80px;
 }
+
+.form-control{
+  width: 70%;
+  padding: 1rem;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  background-color: white ;
+  color: black;
+  font-size: 1rem;
+  font-weight: 700;
+  margin: auto ;
+  text-align: left;
+}
+
+.form-control:focus{
+  background-color: rgba(255, 83, 26, .1) ;
+}
+
+::placeholder{
+  color: rgba(255, 83, 26, .4);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.form-control label{
+  font-size: 1rem;
+  font-weight: 700;
+  color: black;
+}
+
+.form-control .form-group{
+  margin-bottom: 1rem;
+}

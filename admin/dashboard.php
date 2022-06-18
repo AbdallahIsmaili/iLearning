@@ -562,9 +562,9 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
 
                         for ($i=1; $i <= $total_pages ; $i++) { 
                         # code...
-                        echo "<li class='pagination-item'>";
-                        echo "<a class='pagination-link' href='dashboard.php?page=".$i."#categories'>".$i."</a>";
-                        echo "</li>";
+                            echo "<li class='pagination-item'>";
+                            echo "<a class='pagination-link' href='dashboard.php?page=".$i."#categories'>".$i."</a>";
+                            echo "</li>";
                         }
 
                     }catch(PDOException $e){
@@ -1799,9 +1799,8 @@ if(isset($_SESSION['user_email']) && isset($_SESSION['user_type']) && $_SESSION[
 </html>
 
 <?php
-}
-else{
+
+}else{
   header("Location: ../signin.php");
 }
-
 ?>

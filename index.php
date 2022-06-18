@@ -749,7 +749,7 @@ session_start();
       </div>
 
       <p class="copyright">
-        Copyright © 2022 <a href="#">codewithsadee</a>. All rights reserved.
+        Copyright © 2022 <a href="#">dd101-ISTA-IFRAN</a>. All rights reserved.
       </p>
 
     </footer>

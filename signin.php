@@ -51,7 +51,7 @@ if(isset($_POST['login'])){
   <!--
     - custom css link
   -->
-  <link rel="stylesheet" href="./assets/css/style.css?v1.1">
+  <link rel="stylesheet" href="./assets/css/style.css?v1.2">
   <link rel="stylesheet" href="./assets/css/media_queries.css">
   <link rel="stylesheet" href="./assets/css/animation.css">
 
@@ -115,26 +115,29 @@ if(isset($_POST['login'])){
             <br>
         <br>
         <br>
-            <form action="signin.php" method="POST">
-                <div class="form-group">
-                    <label for="email">Email :</label>
-                    <input type="email" name="email" value="<?php echo $email; ?>" id="email" class="form-control" placeholder="Enter your email">
-                </div>
-                <div class="form-group">
-                    <label for="password">Password :</label>
-                    <input type="password" name="password" value="<?php echo $password; ?>"  id="password" class="form-control" placeholder="Enter your password">
-                </div>
-                <div class="form-group">
-                    <label for="remember">remember me? </label>
-                    <input type="checkbox" name="remember" value="on" placeholder="Confirm your password">
-                </div>
-                <br>
-        <br>
-                <div class="form-group">
-                    <button type="submit" name="login" class="btn btn-primary">Sign in</button>
-                </div>
-            </form>
+        <div class="form-control">
 
+          <form action="signin.php" method="POST">
+            <div class="form-group">
+              <label for="email">Email :</label>
+              <input type="email" name="email" value="<?php echo $email; ?>" id="email" class="form-control" placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+              <label for="password">Password :</label>
+              <input type="password" name="password" value="<?php echo $password; ?>"  id="password" class="form-control" placeholder="Enter your password">
+            </div>
+            <div class="form-group">
+              <label for="remember">remember me? </label>
+              <input type="checkbox" name="remember" value="on" placeholder="Confirm your password">
+            </div>
+            <br>
+            <br>
+            <div class="form-group">
+              <button type="submit" name="login" class="btn btn-primary">Sign in</button>
+            </div>
+          </form>
+        </div>
+          
             <p>don't have an account? <a href="signup.php">register now!</a></p>
         </section>
 

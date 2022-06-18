@@ -53,7 +53,7 @@ if(isset($_POST['register'])){
   <!--
     - custom css link
   -->
-  <link rel="stylesheet" href="./assets/css/style.css?v1.1">
+  <link rel="stylesheet" href="./assets/css/style.css?v1.2">
   <link rel="stylesheet" href="./assets/css/media_queries.css">
   <link rel="stylesheet" href="./assets/css/animation.css">
 
@@ -117,6 +117,8 @@ if(isset($_POST['register'])){
             <br>
         <br>
         <br>
+        <div class="form-control">
+
             <form action="signup.php" method="POST">
                 <div class="form-group">
                     <label for="name">Name :</label>
@@ -142,12 +144,13 @@ if(isset($_POST['register'])){
                     <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="Confirm your password">
                 </div>
                 <br>
-        <br>
+                <br>
                 <div class="form-group">
                     <button type="submit" name="register" class="btn btn-primary">Sign up</button>
                 </div>
             </form>
-
+            
+        </div>
             <p>Already have an account? <a href="signin.php">log in!</a></p>
             <!-- <a href="./config/connect.php">test</a> -->
 

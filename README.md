@@ -2,8 +2,7 @@
  Dynamic eLearning website.
  
  ## Full description.
- Hi everyone! this repository is about an eLearning website where you can find many special courses in any field you need, also the ability to make your account and save the courses you are intrested to...!
- for the teachers you can create a teatcher account and start publishing your courses right the moment, with the ability to see what your students think about your courses using coments.
+Hi everyone! this repository is about an eLearning website where you can find many special courses in any field you need, also the ability to make your account and save the courses you are interested in...! for the teachers you can create a teacher account and start publishing your tutorials right the moment, with the ability to see what your students think about your tutorials using comments.
  
  ## Languages used:
  
@@ -17,13 +16,13 @@
 
 Please make sure to know that front end owner is not me, and you will find all the links about the owner here:
 
-- Website front-end:
+- Website Front-end:
 
 [Animated Education Website with HTML CSS JS](https://youtu.be/1ygRRP-y9pw)
 
 [Codewithsadee](https://www.youtube.com/c/codewithsadee)
 
-- admin panel front-end:
+- admin panel Front-end:
 
 [Responsive Admin Dashboard Panel in HTML CSS & JavaScript | Dark/Light Mode](https://youtu.be/AyV954yKRSw)
 
